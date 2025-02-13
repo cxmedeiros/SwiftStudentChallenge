@@ -26,7 +26,7 @@ struct DialogBox: View {
             
             Rectangle()
                 .frame(width: 800, height:150)
-                .foregroundColor(Color(.dialogBallon))
+                .foregroundColor(Color("dialogBallon"))
                 .cornerRadius(12.89)
                 .shadow(radius: 5)
             
@@ -43,7 +43,7 @@ struct DialogBox: View {
                     }, label: {
                         Image("Arrow")
                             .font(.system(size: 35))
-                            .foregroundColor(Color(.button))
+                            .foregroundColor(Color("button"))
                     })
                     .padding(.trailing, 40)
                 }

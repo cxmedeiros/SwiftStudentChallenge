@@ -15,7 +15,7 @@ struct MilaView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(.menu)
+                Color("menu")
                     .ignoresSafeArea()
                 VStack {
                     HStack(spacing: 100){

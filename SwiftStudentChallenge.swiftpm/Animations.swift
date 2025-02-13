@@ -18,7 +18,7 @@ struct OpenCloseEye: View {
         Image(images[imageIndex])
             .resizable()
             .scaledToFit()
-            .frame(width: 134, height: 163)
+            .frame(width: 112, height: 136)
             .onAppear {
                 timer = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true) { _ in
                     DispatchQueue.main.async {

@@ -16,7 +16,7 @@ struct EyeView: View {
         NavigationStack {
             
             ZStack {
-                Color(.menu)
+                Color("menu")
                     .ignoresSafeArea()
                 
                 VStack {

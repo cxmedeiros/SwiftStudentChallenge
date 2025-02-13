@@ -9,33 +9,22 @@ struct HomeView: View {
             
             ZStack {
                 
-                Color(.menu)
+                Color("menu")
                     .ignoresSafeArea()
                 
                 VStack(spacing: 0){
-                    
-                    VStack(alignment: .leading, spacing: 0){
-                        
-                        HStack(alignment: .bottom){
-                            Text("New")
-                            //.font(gluten)
-                                .foregroundStyle(Color(.button))
-                            //                            .onAppear {
-                            //                                   for family in UIFont.familyNames {
-                            //                                       print(family) // Exibe no console do Xcode
-                            //                                   }
-                            //                               }
-                            //OpenCloseEye()
-                            Arrow()
-                        }
-                        
-                        Text("Vision")
-                        //.font(gluten)
-                            .foregroundStyle(Color(.button))
+
+                
+                    ZStack {
+                        Image("Name")
+                            .padding(.trailing,50)
+                        OpenCloseEye()
+                            .padding(.leading, 180)
+                            .padding(.top, 140)
                     }
-                    //                .task {
-                    //                    getFont()
-                    //                }
+                    //.padding(.bottom, 100)
+                            
+                        
                     HStack(spacing: 100){
                         Image("ColorBlindnessTest")
                         Image("EyePhoto")
@@ -87,6 +76,7 @@ struct HomeView: View {
                         }
                     }
                 }
+                .padding(.bottom, 100)
             }
         }
     }
