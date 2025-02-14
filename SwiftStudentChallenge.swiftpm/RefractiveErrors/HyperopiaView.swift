@@ -1,19 +1,19 @@
 //
-//  LensView.swift
+//  Hyperopia.swift
 //  SwiftStudentChallenge
 //
-//  Created by Camila Xavier de Medeiros on 13/02/25.
+//  Created by Camila Xavier de Medeiros on 14/02/25.
 //
 
 import SwiftUI
 
-struct LensView: View {
+struct HyperopiaView: View {
     
     @State private var showDialog = true
     @State private var dialogIndex = 0
-    @State private var eyeImage = "Myopia"
+    @State private var eyeImage = "Hyperopia"
     
-    @State private var correctLens = "ConcaveLens"
+    @State private var correctLens = "ConvexLens"
     @State private var draggedLens: String? = nil
     @State private var lensPositions: [String: CGPoint] = [
             "ConcaveLens": CGPoint(x: 130, y: 100),
@@ -62,20 +62,20 @@ struct LensView: View {
                         .frame(width: 720, height: 190)
                     }
                     
-                    let dropZone = CGRect(x: 300, y: -300, width: 150, height: 250)
+                    let dropZone = CGRect(x: -50, y: -300, width: 150, height: 250)
                     
                     VStack (alignment: .center) {
                         
                         VStack (spacing: 0){
-                            Arrow()
-                                .padding(.trailing, 600)
+//                            Arrow()
+//                                .padding(.trailing, 600)
                             
                             ZStack {
                                 if !rectangleOff {
                                     Rectangle()
                                         .stroke(Color(.text), lineWidth: 2)
                                         .frame(width: 113, height: 237)
-                                        .padding(.trailing, 150)
+                                        .padding(.trailing, 200)
                                     
                                 }
                                 
@@ -143,7 +143,7 @@ struct LensView: View {
                 withAnimation {
                     showExplosion = true
                     rectangleOff = true
-                    eyeImage = "MyopiaWithLens"
+                    eyeImage = "HyperopiaWithLens"
                     lensPositions[name] = initialPosition(for: name)
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -183,7 +183,3 @@ private func lensSize(for name: String) -> CGSize {
     default: return CGSize(width: 100, height: 100)
     }
 }
-
-
-
-

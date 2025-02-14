@@ -1,13 +1,13 @@
 //
-//  EyeView.swift
+//  RetinaView.swift
 //  SwiftStudentChallenge
 //
-//  Created by Camila Xavier de Medeiros on 12/02/25.
+//  Created by Camila Xavier de Medeiros on 14/02/25.
 //
 
 import SwiftUI
 
-struct EyeView: View {
+struct RetinaView: View {
     
     @State private var showDialog = true
     @State private var dialogIndex = 0
@@ -20,15 +20,19 @@ struct EyeView: View {
                     .ignoresSafeArea()
                 
                 VStack {
-                    
-                    VStack (alignment: .center) {
-                        Image("Cornea")
+                    Spacer()
+                    VStack (alignment: .center, spacing: 100) {
+                        Image("Retina")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 400, height: 400)
+                            .frame(width: 500, height: 500)
                         
-                        Window()
+                        
+                        Projector()
+                            
                     }
+                    
+                    Spacer()
                     VStack (spacing: 0){
                         DialogBox(
                             isVisible: $showDialog,
@@ -42,4 +46,3 @@ struct EyeView: View {
         .navigationBarBackButtonHidden(true)
     }
 }
-

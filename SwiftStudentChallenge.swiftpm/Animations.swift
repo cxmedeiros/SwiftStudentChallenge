@@ -74,7 +74,7 @@ struct MagnifyngGlass: View {
         Image(images[imageIndex])
             .resizable()
             .scaledToFit()
-            .frame(width: 134, height: 163)
+            .frame(width: 380, height: 330)
             .onAppear {
                 timer = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true) { _ in
                     DispatchQueue.main.async {
@@ -102,7 +102,7 @@ struct Projector: View {
         Image(images[imageIndex])
             .resizable()
             .scaledToFit()
-            .frame(width: 134, height: 163)
+            .frame(width: 615, height: 250)
             .onAppear {
                 timer = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true) { _ in
                     DispatchQueue.main.async {
