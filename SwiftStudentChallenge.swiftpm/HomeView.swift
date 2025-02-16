@@ -22,9 +22,7 @@ struct HomeView: View {
                             .padding(.leading, 180)
                             .padding(.top, 140)
                     }
-                    //.padding(.bottom, 100)
                             
-                        
                     HStack(spacing: 100){
                         Image("ColorBlindnessTest")
                         Image("EyePhoto")
@@ -39,7 +37,6 @@ struct HomeView: View {
                             Image("Desk")
                                 .resizable()
                                 .scaledToFit()
-                            //.frame(width:510, height: 397)
                         }
                         
                         VStack (spacing: 23.51) {
@@ -80,16 +77,5 @@ struct HomeView: View {
             }
         }
     }
-//    
-//    func getFont() {
-//        let cfURL = Bundle.main.url(forResource: "Gluten-Regula", withExtension: "ttf")! as CFURL
-//        
-//        CTFontManagerRegisterFontsForURL(cfURL, CTFontManagerScope.process, nil)
-//        
-//        let uiFont = UIFont(name: "Gluten-Regular.ttf", size:  30.0)
-//        
-//        gluten = Font(uiFont ?? UIFont())
-//
-//    }
 }
 

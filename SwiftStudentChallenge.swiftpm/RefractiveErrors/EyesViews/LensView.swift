@@ -11,6 +11,7 @@ struct LensView: View {
     
     @State private var showDialog = true
     @State private var dialogIndex = 0
+    @State private var moveToNextScreen = false
     
     var body: some View {
         NavigationStack {
@@ -37,11 +38,16 @@ struct LensView: View {
                         DialogBox(
                             isVisible: $showDialog,
                             currentDialogIndex: $dialogIndex,
-                            dialogs: DialogData.intro
+                            moveToNextScreen: $moveToNextScreen,
+                            dialogs: DialogData.lens,
+                            dialogColor: Color("dialogBallon2")
                         )
                     }
                 }
             }
+        }
+        .navigationDestination(isPresented: $moveToNextScreen) {
+            RetinaView()
         }
         .navigationBarBackButtonHidden(true)
     }

@@ -10,6 +10,7 @@ import SwiftUI
 struct MyopiaView: View {
     
     @State private var showDialog = true
+    @State private var moveToNextScreen = false
     @State private var dialogIndex = 0
     @State private var eyeImage = "Myopia"
     
@@ -105,11 +106,16 @@ struct MyopiaView: View {
                         DialogBox(
                             isVisible: $showDialog,
                             currentDialogIndex: $dialogIndex,
-                            dialogs: DialogData.intro
+                            moveToNextScreen: $moveToNextScreen,
+                            dialogs: DialogData.myopia,
+                            dialogColor: Color("dialogBallon2")
                         )
                     }
                 }
             }
+        }
+        .navigationDestination(isPresented: $moveToNextScreen) {
+            HyperopiaView()
         }
         .navigationBarBackButtonHidden(true)
     }

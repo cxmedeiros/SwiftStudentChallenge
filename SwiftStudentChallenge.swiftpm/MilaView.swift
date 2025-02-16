@@ -11,6 +11,7 @@ struct MilaView: View {
     
     @State private var showDialog = true
     @State private var dialogIndex = 0
+    @State private var moveToNextScreen = false
     
     var body: some View {
         NavigationStack {
@@ -33,7 +34,6 @@ struct MilaView: View {
                             Image("Desk")
                                 .resizable()
                                 .scaledToFit()
-                            //.frame(width:510, height: 397)
                         }
                     }
                     .opacity(0.45)
@@ -43,10 +43,16 @@ struct MilaView: View {
                     DialogBox(
                         isVisible: $showDialog,
                         currentDialogIndex: $dialogIndex,
-                        dialogs: DialogData.intro
+                        moveToNextScreen: $moveToNextScreen,
+                        dialogs: DialogData.intro,
+                        dialogColor: Color("dialogBallon1")
                     )
+                    
                 }
                 
+            }
+            .navigationDestination(isPresented: $moveToNextScreen) {
+                CorneaPupilIrisView()
             }
         }
         .navigationBarBackButtonHidden(true)

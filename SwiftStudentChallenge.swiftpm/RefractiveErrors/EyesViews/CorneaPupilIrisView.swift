@@ -11,6 +11,7 @@ struct CorneaPupilIrisView: View {
     
     @State private var showDialog = true
     @State private var dialogIndex = 0
+    @State private var moveToNextScreen = false
     
     var body: some View {
         NavigationStack {
@@ -34,11 +35,16 @@ struct CorneaPupilIrisView: View {
                         DialogBox(
                             isVisible: $showDialog,
                             currentDialogIndex: $dialogIndex,
-                            dialogs: DialogData.intro
+                            moveToNextScreen: $moveToNextScreen,
+                            dialogs: DialogData.corneaPupilIris,
+                            dialogColor: Color("dialogBallon2")
                         )
                     }
                 }
             }
+        }
+        .navigationDestination(isPresented: $moveToNextScreen) {
+            LensView()
         }
         .navigationBarBackButtonHidden(true)
     }

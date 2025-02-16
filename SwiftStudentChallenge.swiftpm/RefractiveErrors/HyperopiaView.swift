@@ -10,6 +10,7 @@ import SwiftUI
 struct HyperopiaView: View {
     
     @State private var showDialog = true
+    @State private var moveToNextScreen = false
     @State private var dialogIndex = 0
     @State private var eyeImage = "Hyperopia"
     
@@ -105,11 +106,16 @@ struct HyperopiaView: View {
                         DialogBox(
                             isVisible: $showDialog,
                             currentDialogIndex: $dialogIndex,
-                            dialogs: DialogData.intro
+                            moveToNextScreen: $moveToNextScreen,
+                            dialogs: DialogData.hyperopia,
+                            dialogColor: Color("dialogBallon2")
                         )
                     }
                 }
             }
+        }
+        .navigationDestination(isPresented: $moveToNextScreen) {
+            AstigmatismView()
         }
         .navigationBarBackButtonHidden(true)
     }

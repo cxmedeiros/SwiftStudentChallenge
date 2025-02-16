@@ -9,120 +9,162 @@ import SwiftUI
 
 struct DialogBox: View {
     
-  @Binding var isVisible: Bool
-  @Binding var currentDialogIndex: Int
-  @State private var text: String = ""
-  @State private var dialogsIndex: Int = 0
-  @State private var characterIndex: Int = 0
-  @State private var timer: Timer? = nil
-  @State private var isAnimating: Bool = false
-  var dialogs: [Dialog]
-     
-  var body: some View {
-      
-    if isVisible {
-          
-        ZStack {
+    @Binding var isVisible: Bool
+    @Binding var currentDialogIndex: Int
+    @Binding var moveToNextScreen: Bool
+    
+    var dialogs: [Dialog]
+    var dialogColor: Color
+    
+    @State private var text: String = ""
+    @State private var dialogsIndex: Int = 0
+    @State private var characterIndex: Int = 0
+    @State private var timer: Timer? = nil
+    @State private var isAnimating: Bool = false
+    
+    var body: some View {
+        
+        if isVisible {
             
-            Rectangle()
-                .frame(width: 800, height:150)
-                .foregroundColor(Color("dialogBallon"))
-                .cornerRadius(12.89)
-                .shadow(radius: 5)
-            
-            VStack () {
+            ZStack {
                 
-                Text(text)
-                    .font(.custom("SFPro", size: 25))
-                    .frame(maxWidth: 700, alignment: .leading)
-                    .padding(.horizontal, 20)
+                Rectangle()
+                    .frame(width: 800, height:150)
+                    .foregroundColor(dialogColor)
+                    .cornerRadius(12.89)
+                    .shadow(radius: 5)
                 
-                HStack{
-                    Button(action: {
-                        moveToNextDialog()
-                    }, label: {
-                        Image("Arrow")
-                            .font(.system(size: 35))
-                            .foregroundColor(Color("button"))
-                    })
-                    .padding(.trailing, 40)
+                VStack () {
+                    
+                    Text(text)
+                        .font(.custom("SFPro", size: 25))
+                        .frame(maxWidth: 700, alignment: .leading)
+                        .padding(.horizontal, 20)
+                    
+                    HStack{
+                        Button(action: {
+                            moveToNextDialog()
+                        }, label: {
+                            Image("Arrow")
+                                .font(.system(size: 35))
+                                .foregroundColor(Color("button"))
+                        })
+                        .padding(.trailing, 40)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
                 }
-                .frame(maxWidth: .infinity, alignment: .trailing)
+                .frame(width: 800, height: 150)
             }
-            .frame(width: 800, height: 150)
+            .onAppear {
+                resetDialogBox()
+                startTyping()
+            }
+            .onDisappear {
+                resetDialogBox()
+                stopTimer()
+            }
         }
-        .onAppear {
-          resetDialogBox()
-          startTyping()
-        }
-        .onDisappear {
-          resetDialogBox()
-          stopTimer()
-        }
-      }
     }
     
-  private func resetDialogBox() {
-    text = ""
-    dialogsIndex = 0
-    currentDialogIndex = dialogsIndex
-    isAnimating = false
-    startTyping()
-  }
+    private func resetDialogBox() {
+        text = ""
+        dialogsIndex = 0
+        currentDialogIndex = dialogsIndex
+        isAnimating = false
+        startTyping()
+    }
     
-  private func startTyping() {
-    stopTimer()
-    characterIndex = 0
-    text = ""
-    isAnimating = true
-    timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { _ in
-      DispatchQueue.main.async {
-        if characterIndex < dialogs[dialogsIndex].string.count {
-          let dialogString = dialogs[dialogsIndex].string
-          let char = dialogString[dialogString.index(dialogString.startIndex, offsetBy: characterIndex)]
-          text.append(char)
-          characterIndex += 1
+    private func startTyping() {
+        stopTimer()
+        characterIndex = 0
+        text = ""
+        isAnimating = true
+        timer = Timer.scheduledTimer(withTimeInterval: 0.03, repeats: true) { _ in
+            DispatchQueue.main.async {
+                if characterIndex < dialogs[dialogsIndex].string.count {
+                    let dialogString = dialogs[dialogsIndex].string
+                    let char = dialogString[dialogString.index(dialogString.startIndex, offsetBy: characterIndex)]
+                    text.append(char)
+                    characterIndex += 1
+                } else {
+                    stopTimer()
+                    isAnimating = false
+                }
+            }
+        }
+    }
+    
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    private func moveToNextDialog() {
+        if isAnimating {
+            let remainingText = dialogs[dialogsIndex].string.suffix(dialogs[dialogsIndex].string.count - characterIndex)
+            text.append(contentsOf: remainingText)
+            characterIndex = dialogs[dialogsIndex].string.count
+            stopTimer()
+            isAnimating = false
+        } else if dialogsIndex < dialogs.count - 1 {
+            dialogsIndex += 1
+            currentDialogIndex = dialogsIndex
+            startTyping()
         } else {
-          stopTimer()
-          isAnimating = false
+            moveToNextScreen = true
         }
-      }
     }
-  }
-    
-  private func stopTimer() {
-    timer?.invalidate()
-    timer = nil
-  }
-    
-  private func moveToNextDialog() {
-    if isAnimating {
-      let remainingText = dialogs[dialogsIndex].string.suffix(dialogs[dialogsIndex].string.count - characterIndex)
-      text.append(contentsOf: remainingText)
-      characterIndex = dialogs[dialogsIndex].string.count
-      stopTimer()
-      isAnimating = false
-    } else if dialogsIndex < dialogs.count - 1 {
-      dialogsIndex += 1
-      currentDialogIndex = dialogsIndex
-      startTyping()
-    } else {
-      isVisible = false
+}
+    struct Dialog {
+        let string: String
     }
-  }
-}
-
-struct Dialog {
-  let string: String
-}
-
-struct DialogData {
-  static let intro: [Dialog] = [
-    Dialog(string: "Hi, I'm Lucy, I'm an environmental researcher. Welcome to my lab."),
-    Dialog(string: "We're in the best place to make new discoveries and investigate problems linked to climate change. \nHere, we keep a close eye on sea levels and their changes."),
-    Dialog(string: "It looks like we've just received an alert. Let's check it out.")
-  ]
-}
+    
+    struct DialogData {
+        static let intro: [Dialog] = [
+            Dialog(string: "Hi, my name is Mila, and I'm an ophthalmologist!"),
+            Dialog(string: "Let’s learn a little more about our eyes and why millions of people, like me, wear glasses.")
+        ]
+        
+        static let corneaPupilIris: [Dialog] = [
+            Dialog(string: "Imagine the eye as a window."),
+            Dialog(string: "The cornea is the glass, allowing light to enter. But this light needs control, right? "),
+            Dialog(string: "That’s where the pupil and iris come in, like a curtain that opens and closes to adjust the amount of light.")
+        ]
+        
+        static let lens: [Dialog] = [
+            Dialog(string: "Inside the eye, we have natural lenses that work like magnifying glasses, adjusting the focus so we can see clearly.")
+        ]
+        
+        static let retina: [Dialog] = [
+            Dialog(string: "And where is this image projected?"),
+            Dialog(string: "At the back of the eye, on the retina, which works like a movie screen! It captures images and sends them to the brain. Amazing, right?")
+        ]
+        
+        static let correctVision: [Dialog] = [
+            Dialog(string: "When everything works properly, the image is focused perfectly on the retina, and you see the world clearly."),
+            Dialog(string: "But sometimes, our eyes need a little help...")
+        ]
+        
+        static let myopia: [Dialog] = [
+            Dialog(string: "People with myopia see well up close, but distant objects appear blurry."),
+            Dialog(string: "Let’s try a challenge! Which lens can fix this?."),
+            Dialog(string: "That’s right! A divergent lens spreads the light a little before it reaches the eye, placing the image in the right spot!")
+        ]
+        
+        static let hyperopia: [Dialog] = [
+            Dialog(string: "Now, with hyperopia, the eye focuses the image behind the retina. The result? Nearby objects look blurry!"),
+            Dialog(string: "Which lens can correct hyperopia?"),
+            Dialog(string: "Great! A convergent lens helps bring the image into focus at the right spot!")
+        ]
+        
+        static let astigmatism: [Dialog] = [
+            Dialog(string: "With astigmatism, the cornea has an irregular, slightly oval shape. This causes light to scatter, making vision distorted."),
+            Dialog(string: "Do you know which lens can fix this?"),
+            Dialog(string: "Correct! Cylindrical lenses adjust the way light enters, making the image sharper and clearer."),
+            Dialog(string: "Now that we understand these vision problems, let’s see in practice how each person experiences the world!")
+        ]
+        
+    }
 
 
 
