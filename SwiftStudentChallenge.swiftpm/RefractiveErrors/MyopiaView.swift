@@ -9,6 +9,10 @@ import SwiftUI
 
 struct MyopiaView: View {
     
+    let hasChallenge: Bool = true 
+    @State private var showChallenge = false
+    @State private var showFinalDialog = false
+    @State var mutatingDialog = false
     @State private var showDialog = true
     @State private var moveToNextScreen = false
     @State private var dialogIndex = 0
@@ -31,36 +35,33 @@ struct MyopiaView: View {
                 Color("menu")
                     .ignoresSafeArea()
                 
-                VStack (spacing: 50) {
+                VStack (spacing: 100) {
                     
-                    ZStack {
-                        
-                        Rectangle()
-                            .foregroundStyle(Color(.rectangle))
-                            .opacity(0.7)
-                            .frame(width: 677, height: 130)
-                            .cornerRadius(30)
-                       
-
-                        VStack {
-                            HStack {
-                                Image(systemName: "star.fill")
-                                    .foregroundColor(Color(.star))
-                                    .font(.system(size: 40))
-                                    .padding()
+                    if showChallenge {
+                        ZStack {
+                            
+                            VStack {
+                                HStack {
+                                    Image("Star1")
+                                    Spacer()
+                                }
                                 Spacer()
-                            }
-                            Spacer()
-                            HStack {
-                                Spacer()
-                                Image(systemName: "star.fill")
-                                    .foregroundColor(Color(.star))
-                                    .font(.system(size: 40))
-                                    .padding()
+                                HStack {
+                                    Spacer()
+                                    Image("Star1")
                                     
+                                }
                             }
+                            .frame(width: 750, height: 190)
+                            
+                            Rectangle()
+                                .foregroundStyle(Color(.rectangle))
+                                .frame(width: 677, height: 130)
+                                .cornerRadius(30)
+                            
+                            
                         }
-                        .frame(width: 720, height: 190)
+                        .padding(.top, 50)
                     }
                     
                     let dropZone = CGRect(x: 300, y: -300, width: 150, height: 250)
@@ -68,11 +69,9 @@ struct MyopiaView: View {
                     VStack (alignment: .center) {
                         
                         VStack (spacing: 0){
-//                            Arrow()
-//                                .padding(.trailing, 600)
                             
                             ZStack {
-                                if !rectangleOff {
+                                if !rectangleOff && showChallenge {
                                     Rectangle()
                                         .stroke(Color(.text), lineWidth: 2)
                                         .frame(width: 113, height: 237)
@@ -93,23 +92,53 @@ struct MyopiaView: View {
                             }
                         }
                         
-                    HStack() {
-                        lensView(name: "ConcaveLens", label: "Concave Lens", dropZone: dropZone)
-                        lensView(name: "ConvexLens", label: "Convex Lens", dropZone: dropZone)
-                        lensView(name: "CylindricalLens", label: "Cylindrical Lens", dropZone: dropZone)
-                    }
-                    .padding()
-                        
+                        if showChallenge {
+                            HStack() {
+                                lensView(name: "ConcaveLens", label: "Concave Lens", dropZone: dropZone)
+                                lensView(name: "ConvexLens", label: "Convex Lens", dropZone: dropZone)
+                                lensView(name: "CylindricalLens", label: "Cylindrical Lens", dropZone: dropZone)
+                            }
+                            .padding()
+                            
+                        }
                     }
                     
-                    VStack (spacing: 0){
-                        DialogBox(
-                            isVisible: $showDialog,
-                            currentDialogIndex: $dialogIndex,
-                            moveToNextScreen: $moveToNextScreen,
-                            dialogs: DialogData.myopia,
-                            dialogColor: Color("dialogBallon2")
-                        )
+                    VStack (spacing: 0) {
+                        if mutatingDialog {
+                            DialogBox(
+                                isVisible: $showDialog,
+                                currentDialogIndex: $dialogIndex,
+                                moveToNextScreen: $moveToNextScreen,
+                                mutatingDialog: $mutatingDialog,
+                                currentView: "MyopiaView",
+                                dialogs: DialogData.myopiaWithLens,
+                                dialogColor: Color("dialogBallon2")
+                            )
+                        } else {
+                            DialogBox(
+                                isVisible: $showDialog,
+                                currentDialogIndex: $dialogIndex,
+                                moveToNextScreen: $moveToNextScreen,
+                                mutatingDialog: $mutatingDialog,
+                                currentView: "MyopiaView",
+                                dialogs: DialogData.myopia,
+                                dialogColor: Color("dialogBallon2")
+                            )
+                            .onChange(of: dialogIndex) { newValue in
+                                if newValue == 1 {
+                                    withAnimation {
+                                        showChallenge = true
+                                    }
+                                }
+                            }
+                            .onChange(of: rectangleOff) { newValue in
+                                if newValue { // Se o usuário acertou o desafio
+                                    withAnimation {
+                                        showFinalDialog = true
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -146,6 +175,7 @@ struct MyopiaView: View {
     private func checkDrop(name: String, position: CGPoint, dropZone: CGRect) {
         if dropZone.contains(position) {
             if name == correctLens {
+                mutatingDialog = true
                 withAnimation {
                     showExplosion = true
                     rectangleOff = true
@@ -154,6 +184,9 @@ struct MyopiaView: View {
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     showExplosion = false
+                    if hasChallenge { // ✅ Só avança o diálogo se for uma tela de desafio
+                        dialogIndex = 2
+                    }
                 }
             } else {
                 let generator = UINotificationFeedbackGenerator()

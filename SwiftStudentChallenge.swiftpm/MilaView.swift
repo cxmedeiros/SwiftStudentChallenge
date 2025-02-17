@@ -12,7 +12,7 @@ struct MilaView: View {
     @State private var showDialog = true
     @State private var dialogIndex = 0
     @State private var moveToNextScreen = false
-    
+    @State var mutatingDialog = true
     var body: some View {
         NavigationStack {
             ZStack {
@@ -44,6 +44,8 @@ struct MilaView: View {
                         isVisible: $showDialog,
                         currentDialogIndex: $dialogIndex,
                         moveToNextScreen: $moveToNextScreen,
+                        mutatingDialog: $mutatingDialog,
+                        currentView: "MilaView",
                         dialogs: DialogData.intro,
                         dialogColor: Color("dialogBallon1")
                     )

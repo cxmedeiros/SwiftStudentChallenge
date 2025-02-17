@@ -13,7 +13,7 @@ struct AstigmatismView: View {
     @State private var moveToNextScreen = false
     @State private var dialogIndex = 0
     @State private var eyeImage = "Astigmatism"
-    
+    @State var mutatingDialog = false
     @State private var correctLens = "CylindricalLens"
     @State private var draggedLens: String? = nil
     @State private var lensPositions: [String: CGPoint] = [
@@ -35,33 +35,26 @@ struct AstigmatismView: View {
                     
                     ZStack {
                         
-                        Rectangle()
-                            .foregroundStyle(Color(.rectangle))
-                            .opacity(0.7)
-                            .frame(width: 677, height: 130)
-                            .cornerRadius(30)
-                       
-
                         VStack {
                             HStack {
-                                Image(systemName: "star.fill")
-                                    .foregroundColor(Color(.star))
-                                    .font(.system(size: 40))
-                                    .padding()
+                                Image("Star3")
                                 Spacer()
                             }
                             Spacer()
                             HStack {
                                 Spacer()
-                                Image(systemName: "star.fill")
-                                    .foregroundColor(Color(.star))
-                                    .font(.system(size: 40))
-                                    .padding()
-                                    
+                                Image("Star3")
+                                
                             }
                         }
-                        .frame(width: 720, height: 190)
+                        .frame(width: 750, height: 190)
+                        
+                        Rectangle()
+                            .foregroundStyle(Color(.rectangle))
+                            .frame(width: 677, height: 130)
+                            .cornerRadius(30)
                     }
+                    
                     
                     let dropZone = CGRect(x: -300, y: -300, width: 150, height: 250)
                     
@@ -107,6 +100,8 @@ struct AstigmatismView: View {
                             isVisible: $showDialog,
                             currentDialogIndex: $dialogIndex,
                             moveToNextScreen: $moveToNextScreen,
+                            mutatingDialog: $mutatingDialog,
+                            currentView: "AstigmatismView",
                             dialogs: DialogData.astigmatism,
                             dialogColor: Color("dialogBallon2")
                         )

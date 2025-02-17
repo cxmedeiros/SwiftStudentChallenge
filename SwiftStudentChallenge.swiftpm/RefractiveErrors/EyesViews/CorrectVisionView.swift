@@ -12,6 +12,8 @@ struct CorrectVisionView: View {
     @State private var showDialog = true
     @State private var dialogIndex = 0
     @State private var moveToNextScreen = false
+    @State private var isMutatingDialog = false
+    @State var mutatingDialog = true
     
     var body: some View {
         NavigationStack {
@@ -39,6 +41,8 @@ struct CorrectVisionView: View {
                             isVisible: $showDialog,
                             currentDialogIndex: $dialogIndex,
                             moveToNextScreen: $moveToNextScreen,
+                            mutatingDialog: $mutatingDialog,
+                            currentView: "CorrectVisionView",
                             dialogs: DialogData.correctVision,
                             dialogColor: Color("dialogBallon2")
                         )
@@ -47,7 +51,7 @@ struct CorrectVisionView: View {
             }
         }
         .navigationDestination(isPresented: $moveToNextScreen) {
-            MyopiaView()
+            MyopiaView(mutatingDialog: isMutatingDialog)
         }
         .navigationBarBackButtonHidden(true)
     }

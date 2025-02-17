@@ -12,6 +12,7 @@ struct CorneaPupilIrisView: View {
     @State private var showDialog = true
     @State private var dialogIndex = 0
     @State private var moveToNextScreen = false
+    @State var mutatingDialog = true
     
     var body: some View {
         NavigationStack {
@@ -23,7 +24,7 @@ struct CorneaPupilIrisView: View {
                 VStack {
                     Spacer()
                     VStack (alignment: .center, spacing: 100) {
-                        Image("Cornea")
+                        Image("CorneaPupilIris")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 500, height: 500)
@@ -36,6 +37,8 @@ struct CorneaPupilIrisView: View {
                             isVisible: $showDialog,
                             currentDialogIndex: $dialogIndex,
                             moveToNextScreen: $moveToNextScreen,
+                            mutatingDialog: $mutatingDialog,
+                            currentView: "CorneaPupilIrisView",
                             dialogs: DialogData.corneaPupilIris,
                             dialogColor: Color("dialogBallon2")
                         )

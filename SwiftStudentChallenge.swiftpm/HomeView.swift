@@ -44,12 +44,12 @@ struct HomeView: View {
                                 isNavigating = true }) {
                                 ZStack {
                                     Rectangle()
-                                        .frame(width: 323, height: 67)
+                                        .frame(width: 284, height: 67)
                                         .foregroundColor(Color(.button))
                                         .cornerRadius(12.89)
                                         .shadow(radius: 5)
                                     Text("Start")
-                                        .font(.system(size: 41.25, weight: .regular))
+                                        .font(.system(size: 38, weight: .regular))
                                         .foregroundColor(.white)
                                     
                                 }
@@ -61,12 +61,12 @@ struct HomeView: View {
                             Button(action: {}) {
                                 ZStack {
                                     Rectangle()
-                                        .frame(width: 323, height: 67)
+                                        .frame(width: 284, height: 67)
                                         .foregroundColor(Color(.button))
                                         .cornerRadius(12.89)
                                         .shadow(radius: 5)
                                     Text("Credits")
-                                        .font(.system(size: 41.25, weight: .regular, design: .default))
+                                        .font(.system(size: 38, weight: .regular, design: .default))
                                         .foregroundColor(.white)
                                 }
                             }
