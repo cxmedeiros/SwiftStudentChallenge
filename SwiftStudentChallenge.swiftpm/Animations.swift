@@ -1,9 +1,3 @@
-//
-//  Animations.swift
-//  SwiftStudentChallenge
-//
-//  Created by Camila Xavier de Medeiros on 07/02/25.
-//
 import SwiftUI
 
 struct OpenCloseEye: View {

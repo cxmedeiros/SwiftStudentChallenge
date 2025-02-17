@@ -2,8 +2,9 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @State private var gluten: Font?
     @State private var isNavigating = false
+    @State private var isNavigating2 = false
+    
     var body: some View {
         NavigationStack {
             
@@ -55,10 +56,11 @@ struct HomeView: View {
                                 }
                             }
                             .navigationDestination(isPresented: $isNavigating) {
-                                    MilaView()
+                                CharacterView()
                             }
 
-                            Button(action: {}) {
+                            Button(action: {
+                                isNavigating2 = true}) {
                                 ZStack {
                                     Rectangle()
                                         .frame(width: 284, height: 67)
@@ -69,6 +71,9 @@ struct HomeView: View {
                                         .font(.system(size: 38, weight: .regular, design: .default))
                                         .foregroundColor(.white)
                                 }
+                            }
+                            .navigationDestination(isPresented: $isNavigating2) {
+                                CreditsView()
                             }
                         }
                     }

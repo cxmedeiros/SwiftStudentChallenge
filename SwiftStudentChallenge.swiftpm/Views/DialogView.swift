@@ -1,10 +1,3 @@
-//
-//  DialogueView.swift
-//  SwiftStudentChallenge
-//
-//  Created by Camila Xavier de Medeiros on 12/02/25.
-//
-
 import SwiftUI
 
 struct DialogBox: View {
@@ -43,6 +36,7 @@ struct DialogBox: View {
                     
                     Text(text)
                         .font(.custom("SFPro", size: 25))
+                        .foregroundStyle(Color("button"))
                         .frame(maxWidth: 700, alignment: .leading)
                         .padding(.horizontal, 20)
                     

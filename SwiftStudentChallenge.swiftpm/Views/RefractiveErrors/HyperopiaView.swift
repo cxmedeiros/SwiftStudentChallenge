@@ -1,5 +1,5 @@
 //
-//  AstigmatismView.swift
+//  Hyperopia.swift
 //  SwiftStudentChallenge
 //
 //  Created by Camila Xavier de Medeiros on 14/02/25.
@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-struct AstigmatismView: View {
-    
+struct HyperopiaView: View {
     
     let hasChallenge: Bool = true
     @State private var showChallenge = false
@@ -21,9 +20,10 @@ struct AstigmatismView: View {
     @State private var rectangleOff = false
     
     @State private var dialogIndex = 0
-    @State private var eyeImage = "Astigmatism"
+    @State private var eyeImage = "Hyperopia"
     
-    @State private var correctLens = "CylindricalLens"
+    
+    @State private var correctLens = "ConvexLens"
     @State private var draggedLens: String? = nil
     @State private var lensPositions: [String: CGPoint] = [
             "ConcaveLens": CGPoint(x: 130, y: 100),
@@ -32,7 +32,6 @@ struct AstigmatismView: View {
         ]
    
     var body: some View {
-        
         NavigationStack {
             
             ZStack {
@@ -43,17 +42,17 @@ struct AstigmatismView: View {
                     VStack (spacing: 100) {
                         
                         if showChallenge {
-                            
                             ZStack {
+                                
                                 VStack {
                                     HStack {
-                                        Image("Star3")
+                                        Image("Star2")
                                         Spacer()
                                     }
-                                    Spacer()
+                                   
                                     HStack {
                                         Spacer()
-                                        Image("Star3")
+                                        Image("Star2")
                                         
                                     }
                                 }
@@ -64,25 +63,24 @@ struct AstigmatismView: View {
                                     .frame(width: 677, height: 130)
                                     .cornerRadius(30)
                                 
-                                Text("Place the correct lens in the rectangle \n to correct Astigmatism!")
-                                    .multilineTextAlignment(.center)
-                                    .font(.system(size: 30, weight: .medium))
-                                    .foregroundStyle(Color("text"))
+                               Text("Drag the correct lens into the rectangle \n to correct Hyperopia!")
+                                   .multilineTextAlignment(.center)
+                                   .font(.system(size: 30, weight: .semibold))
+                                   .foregroundStyle(Color("text"))
+                                
                             }
                             .padding(.top, 50)
                         }
                         
-                        
-                        let dropZone = CGRect(x: -300, y: -300, width: 150, height: 250)
+                        let dropZone = CGRect(x: -50, y: -300, width: 150, height: 250)
                         
                         VStack (alignment: .center) {
                             
                             Spacer()
-                            
                             ZStack {
                                 if !rectangleOff && showChallenge {
                                     Rectangle()
-                                        .stroke(Color(.text), lineWidth: 2)
+                                        .stroke(Color("text"), lineWidth: 2)
                                         .frame(width: 113, height: 237)
                                         .padding(.trailing, 200)
                                     
@@ -101,9 +99,8 @@ struct AstigmatismView: View {
                             }
                             
                             Spacer()
-                                
+                            
                             if showChallenge {
-                                
                                 HStack() {
                                     lensView(name: "ConcaveLens", label: "Concave Lens", dropZone: dropZone)
                                     lensView(name: "ConvexLens", label: "Convex Lens", dropZone: dropZone)
@@ -111,8 +108,8 @@ struct AstigmatismView: View {
                                 }
                                 .padding()
                             }
-                            
                         }
+                        Spacer()
                         
                         if mutatingDialog {
                             DialogBox(
@@ -120,8 +117,8 @@ struct AstigmatismView: View {
                                 currentDialogIndex: $dialogIndex,
                                 moveToNextScreen: $moveToNextScreen,
                                 mutatingDialog: $mutatingDialog,
-                                currentView: "AstigmatismView",
-                                dialogs:DialogData.astigmatismWithLens,
+                                currentView: "HyperopiaView",
+                                dialogs: DialogData.hyperopiaWithLens,
                                 dialogColor: Color("dialogBallon2")
                             )
                         } else {
@@ -130,8 +127,8 @@ struct AstigmatismView: View {
                                 currentDialogIndex: $dialogIndex,
                                 moveToNextScreen: $moveToNextScreen,
                                 mutatingDialog: $mutatingDialog,
-                                currentView: "AstigmatismView",
-                                dialogs: DialogData.astigmatism,
+                                currentView: "HyperopiaView",
+                                dialogs: DialogData.hyperopia,
                                 dialogColor: Color("dialogBallon2")
                             )
                             .onChange(of: dialogIndex) { newValue in
@@ -163,7 +160,7 @@ struct AstigmatismView: View {
         View {
             VStack (spacing: 0) {
                     Text(label)
-                        .font(.system(size: 30, weight: .bold))
+                    .font(.system(size: 30, weight: .semibold))
                         .foregroundStyle(correctLensSelected && name == correctLens ? Color("button2") : Color("text"))
                         .padding(.top,20)
                     
@@ -191,7 +188,7 @@ struct AstigmatismView: View {
                 withAnimation {
                     showExplosion = true
                     rectangleOff = true
-                    eyeImage = "AstigmatismWithLens"
+                    eyeImage = "HyperopiaWithLens"
                     lensPositions[name] = initialPosition(for: name)
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {

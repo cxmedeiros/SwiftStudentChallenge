@@ -49,7 +49,7 @@ struct MyopiaView: View {
                                         Image("Star1")
                                         Spacer()
                                     }
-                                    Spacer()
+                                   
                                     HStack {
                                         Spacer()
                                         Image("Star1")
@@ -63,9 +63,9 @@ struct MyopiaView: View {
                                     .frame(width: 677, height: 130)
                                     .cornerRadius(30)
                                 
-                                Text("Place the correct lens in the rectangle \n to correct Myopia!")
+                                Text("Drag the correct lens into the rectangle \n to correct Myopia!")
                                     .multilineTextAlignment(.center)
-                                    .font(.system(size: 30, weight: .medium))
+                                    .font(.system(size: 30, weight: .semibold))
                                     .foregroundStyle(Color("text"))
                                     
                             }
@@ -161,7 +161,7 @@ struct MyopiaView: View {
         View {
             VStack (spacing: 0) {
                     Text(label)
-                        .font(.system(size: 30, weight: .bold))
+                    .font(.system(size: 30, weight: .semibold))
                         .foregroundStyle(correctLensSelected && name == correctLens ? Color("button2") : Color("text"))
                         .padding(.top,20)
                     

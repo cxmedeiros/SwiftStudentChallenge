@@ -1,13 +1,6 @@
-//
-//  MilaView.swift
-//  SwiftStudentChallenge
-//
-//  Created by Camila Xavier de Medeiros on 12/02/25.
-//
-
 import SwiftUI
 
-struct MilaView: View {
+struct CharacterView: View {
     
     @State private var showDialog = true
     @State private var dialogIndex = 0
