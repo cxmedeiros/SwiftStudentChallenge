@@ -9,15 +9,19 @@ import SwiftUI
 
 struct MyopiaView: View {
     
-    let hasChallenge: Bool = true 
+    let hasChallenge: Bool = true
     @State private var showChallenge = false
     @State private var showFinalDialog = false
     @State var mutatingDialog = false
     @State private var showDialog = true
     @State private var moveToNextScreen = false
+    @State private var correctLensSelected: Bool = false
+    @State private var showExplosion = false
+    @State private var rectangleOff = false
+
     @State private var dialogIndex = 0
     @State private var eyeImage = "Myopia"
-    
+
     @State private var correctLens = "ConcaveLens"
     @State private var draggedLens: String? = nil
     @State private var lensPositions: [String: CGPoint] = [
@@ -25,55 +29,59 @@ struct MyopiaView: View {
             "ConvexLens": CGPoint(x: 130, y: 100),
             "CylindricalLens": CGPoint(x: 130, y: 100)
         ]
-    @State private var showExplosion = false
-    @State private var rectangleOff = false
     
     var body: some View {
+        
         NavigationStack {
-            
+                
             ZStack {
                 Color("menu")
                     .ignoresSafeArea()
                 
-                VStack (spacing: 100) {
-                    
-                    if showChallenge {
-                        ZStack {
-                            
-                            VStack {
-                                HStack {
-                                    Image("Star1")
-                                    Spacer()
-                                }
-                                Spacer()
-                                HStack {
-                                    Spacer()
-                                    Image("Star1")
-                                    
-                                }
-                            }
-                            .frame(width: 750, height: 190)
-                            
-                            Rectangle()
-                                .foregroundStyle(Color(.rectangle))
-                                .frame(width: 677, height: 130)
-                                .cornerRadius(30)
-                            
-                            
-                        }
-                        .padding(.top, 50)
-                    }
-                    
-                    let dropZone = CGRect(x: 300, y: -300, width: 150, height: 250)
-                    
-                    VStack (alignment: .center) {
+                VStack (spacing: 0) {
+                    VStack (spacing: 100) {
                         
-                        VStack (spacing: 0){
+                        if showChallenge {
+                            ZStack {
+                                
+                                VStack {
+                                    HStack {
+                                        Image("Star1")
+                                        Spacer()
+                                    }
+                                    Spacer()
+                                    HStack {
+                                        Spacer()
+                                        Image("Star1")
+                                        
+                                    }
+                                }
+                                .frame(width: 750, height: 190)
+                                
+                                Rectangle()
+                                    .foregroundStyle(Color("rectangle"))
+                                    .frame(width: 677, height: 130)
+                                    .cornerRadius(30)
+                                
+                                Text("Place the correct lens in the rectangle \n to correct Myopia!")
+                                    .multilineTextAlignment(.center)
+                                    .font(.system(size: 30, weight: .medium))
+                                    .foregroundStyle(Color("text"))
+                                    
+                            }
+                            .padding(.top, 50)
+                        }
+                        
+                        let dropZone = CGRect(x: 300, y: -300, width: 150, height: 250)
+                        
+                        VStack (alignment: .center) {
+                            
+                            Spacer()
                             
                             ZStack {
                                 if !rectangleOff && showChallenge {
                                     Rectangle()
-                                        .stroke(Color(.text), lineWidth: 2)
+                                        .stroke(Color("text"), lineWidth: 2)
                                         .frame(width: 113, height: 237)
                                         .padding(.trailing, 150)
                                     
@@ -90,20 +98,20 @@ struct MyopiaView: View {
                                     .frame(width: 690, height: 340)
                                 
                             }
-                        }
-                        
-                        if showChallenge {
-                            HStack() {
-                                lensView(name: "ConcaveLens", label: "Concave Lens", dropZone: dropZone)
-                                lensView(name: "ConvexLens", label: "Convex Lens", dropZone: dropZone)
-                                lensView(name: "CylindricalLens", label: "Cylindrical Lens", dropZone: dropZone)
-                            }
-                            .padding()
                             
+                            Spacer()
+                            
+                            if showChallenge {
+                                HStack() {
+                                    lensView(name: "ConcaveLens", label: "Concave Lens", dropZone: dropZone)
+                                    lensView(name: "ConvexLens", label: "Convex Lens", dropZone: dropZone)
+                                    lensView(name: "CylindricalLens", label: "Cylindrical Lens", dropZone: dropZone)
+                                }
+                                .padding()
+                                
+                            }
                         }
-                    }
-                    
-                    VStack (spacing: 0) {
+                        Spacer()
                         if mutatingDialog {
                             DialogBox(
                                 isVisible: $showDialog,
@@ -132,7 +140,7 @@ struct MyopiaView: View {
                                 }
                             }
                             .onChange(of: rectangleOff) { newValue in
-                                if newValue { // Se o usuário acertou o desafio
+                                if newValue {
                                     withAnimation {
                                         showFinalDialog = true
                                     }
@@ -149,26 +157,27 @@ struct MyopiaView: View {
         .navigationBarBackButtonHidden(true)
     }
     
-    private func lensView(name: String, label: String, dropZone: CGRect) -> some View {
-        VStack (spacing: 0) {
-                Text(label)
-                    .font(.system(size: 30, weight: .bold))
-                    .foregroundStyle(Color(.text))
-                    .padding(.top,20)
-                
-                Image(name)
-                    .resizable()
-                    .frame(width: lensSize(for: name).width, height: lensSize(for: name).height)
-                    .position(lensPositions[name]!)
-                    .gesture(
-                        DragGesture()
-                            .onChanged { value in
-                                lensPositions[name] = value.location
-                            }
-                            .onEnded { value in
-                                checkDrop(name: name, position: value.location, dropZone: dropZone)
-                            }
-                    )
+    private func lensView(name: String, label: String, dropZone: CGRect) -> some
+        View {
+            VStack (spacing: 0) {
+                    Text(label)
+                        .font(.system(size: 30, weight: .bold))
+                        .foregroundStyle(correctLensSelected && name == correctLens ? Color("button2") : Color("text"))
+                        .padding(.top,20)
+                    
+                    Image(name)
+                        .resizable()
+                        .frame(width: lensSize(for: name).width, height: lensSize(for: name).height)
+                        .position(lensPositions[name]!)
+                        .gesture(
+                            DragGesture()
+                                .onChanged { value in
+                                    lensPositions[name] = value.location
+                                }
+                                .onEnded { value in
+                                    checkDrop(name: name, position: value.location, dropZone: dropZone)
+                                }
+                        )
             }
         }
     
@@ -176,6 +185,7 @@ struct MyopiaView: View {
         if dropZone.contains(position) {
             if name == correctLens {
                 mutatingDialog = true
+                correctLensSelected = true
                 withAnimation {
                     showExplosion = true
                     rectangleOff = true
@@ -184,7 +194,7 @@ struct MyopiaView: View {
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     showExplosion = false
-                    if hasChallenge { // ✅ Só avança o diálogo se for uma tela de desafio
+                    if hasChallenge {
                         dialogIndex = 2
                     }
                 }
@@ -203,7 +213,6 @@ struct MyopiaView: View {
         }
     }
 
-    
     private func initialPosition(for name: String) -> CGPoint {
             switch name {
             case "ConcaveLens": return CGPoint(x: 130, y: 100)
@@ -212,7 +221,8 @@ struct MyopiaView: View {
             default: return .zero
             }
         }
-    }
+    
+}
 
 private func lensSize(for name: String) -> CGSize {
     switch name {

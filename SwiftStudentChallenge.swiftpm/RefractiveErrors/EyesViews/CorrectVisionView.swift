@@ -25,7 +25,7 @@ struct CorrectVisionView: View {
                 VStack {
                     Spacer()
                     VStack (alignment: .center, spacing: 100) {
-                        Image("Lens")
+                        Image("Retina")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 500, height: 500)

@@ -9,11 +9,20 @@ import SwiftUI
 
 struct HyperopiaView: View {
     
+    let hasChallenge: Bool = true
+    @State private var showChallenge = false
+    @State private var showFinalDialog = false
+    @State var mutatingDialog = false
     @State private var showDialog = true
     @State private var moveToNextScreen = false
+    @State private var correctLensSelected: Bool = false
+    @State private var showExplosion = false
+    @State private var rectangleOff = false
+    
     @State private var dialogIndex = 0
     @State private var eyeImage = "Hyperopia"
-    @State var mutatingDialog = false
+    
+    
     @State private var correctLens = "ConvexLens"
     @State private var draggedLens: String? = nil
     @State private var lensPositions: [String: CGPoint] = [
@@ -21,9 +30,7 @@ struct HyperopiaView: View {
             "ConvexLens": CGPoint(x: 130, y: 100),
             "CylindricalLens": CGPoint(x: 130, y: 100)
         ]
-    @State private var showExplosion = false
-    @State private var rectangleOff = false
-    
+   
     var body: some View {
         NavigationStack {
             
@@ -31,45 +38,49 @@ struct HyperopiaView: View {
                 Color("menu")
                     .ignoresSafeArea()
                 
-                VStack (spacing: 50) {
-                    
-                    ZStack {
+                VStack (spacing: 0) {
+                    VStack (spacing: 100) {
                         
-                        VStack {
-                            HStack {
-                                Image("Star2")
-                                Spacer()
-                            }
-                            Spacer()
-                            HStack {
-                                Spacer()
-                                Image("Star2")
+                        if showChallenge {
+                            ZStack {
+                                
+                                VStack {
+                                    HStack {
+                                        Image("Star2")
+                                        Spacer()
+                                    }
+                                    Spacer()
+                                    HStack {
+                                        Spacer()
+                                        Image("Star2")
+                                        
+                                    }
+                                }
+                                .frame(width: 750, height: 190)
+                                
+                                Rectangle()
+                                    .foregroundStyle(Color("rectangle"))
+                                    .frame(width: 677, height: 130)
+                                    .cornerRadius(30)
+                                
+                               Text("Place the correct lens in the rectangle \n to correct Hyperopia!")
+                                   .multilineTextAlignment(.center)
+                                   .font(.system(size: 30, weight: .medium))
+                                   .foregroundStyle(Color("text"))
                                 
                             }
+                            .padding(.top, 50)
                         }
-                        .frame(width: 750, height: 190)
                         
-                        Rectangle()
-                            .foregroundStyle(Color(.rectangle))
-                            .frame(width: 677, height: 130)
-                            .cornerRadius(30)
-                       
-
-                    }
-                    .padding(.top, 50)
-                    
-                    let dropZone = CGRect(x: -50, y: -300, width: 150, height: 250)
-                    
-                    VStack (alignment: .center) {
+                        let dropZone = CGRect(x: -50, y: -300, width: 150, height: 250)
                         
-                        VStack (spacing: 0){
-//                            Arrow()
-//                                .padding(.trailing, 600)
+                        VStack (alignment: .center) {
                             
+                            Spacer()
                             ZStack {
-                                if !rectangleOff {
+                                if !rectangleOff && showChallenge {
                                     Rectangle()
-                                        .stroke(Color(.text), lineWidth: 2)
+                                        .stroke(Color("text"), lineWidth: 2)
                                         .frame(width: 113, height: 237)
                                         .padding(.trailing, 200)
                                     
@@ -86,27 +97,55 @@ struct HyperopiaView: View {
                                     .frame(width: 690, height: 340)
                                 
                             }
+                            
+                            Spacer()
+                            
+                            if showChallenge {
+                                HStack() {
+                                    lensView(name: "ConcaveLens", label: "Concave Lens", dropZone: dropZone)
+                                    lensView(name: "ConvexLens", label: "Convex Lens", dropZone: dropZone)
+                                    lensView(name: "CylindricalLens", label: "Cylindrical Lens", dropZone: dropZone)
+                                }
+                                .padding()
+                            }
                         }
+                        Spacer()
                         
-                    HStack() {
-                        lensView(name: "ConcaveLens", label: "Concave Lens", dropZone: dropZone)
-                        lensView(name: "ConvexLens", label: "Convex Lens", dropZone: dropZone)
-                        lensView(name: "CylindricalLens", label: "Cylindrical Lens", dropZone: dropZone)
-                    }
-                    .padding()
-                        
-                    }
-                    
-                    VStack (spacing: 0){
-                        DialogBox(
-                            isVisible: $showDialog,
-                            currentDialogIndex: $dialogIndex,
-                            moveToNextScreen: $moveToNextScreen,
-                            mutatingDialog: $mutatingDialog,
-                            currentView: "HyperopiaView",
-                            dialogs: DialogData.hyperopia,
-                            dialogColor: Color("dialogBallon2")
-                        )
+                        if mutatingDialog {
+                            DialogBox(
+                                isVisible: $showDialog,
+                                currentDialogIndex: $dialogIndex,
+                                moveToNextScreen: $moveToNextScreen,
+                                mutatingDialog: $mutatingDialog,
+                                currentView: "HyperopiaView",
+                                dialogs: DialogData.hyperopiaWithLens,
+                                dialogColor: Color("dialogBallon2")
+                            )
+                        } else {
+                            DialogBox(
+                                isVisible: $showDialog,
+                                currentDialogIndex: $dialogIndex,
+                                moveToNextScreen: $moveToNextScreen,
+                                mutatingDialog: $mutatingDialog,
+                                currentView: "HyperopiaView",
+                                dialogs: DialogData.hyperopia,
+                                dialogColor: Color("dialogBallon2")
+                            )
+                            .onChange(of: dialogIndex) { newValue in
+                                if newValue == 1 {
+                                    withAnimation {
+                                        showChallenge = true
+                                    }
+                                }
+                            }
+                            .onChange(of: rectangleOff) { newValue in
+                                if newValue {
+                                    withAnimation {
+                                        showFinalDialog = true
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -117,32 +156,35 @@ struct HyperopiaView: View {
         .navigationBarBackButtonHidden(true)
     }
     
-    private func lensView(name: String, label: String, dropZone: CGRect) -> some View {
-        VStack (spacing: 0) {
-                Text(label)
-                    .font(.system(size: 30, weight: .bold))
-                    .foregroundStyle(Color(.text))
-                    .padding(.top,20)
-                
-                Image(name)
-                    .resizable()
-                    .frame(width: lensSize(for: name).width, height: lensSize(for: name).height)
-                    .position(lensPositions[name]!)
-                    .gesture(
-                        DragGesture()
-                            .onChanged { value in
-                                lensPositions[name] = value.location
-                            }
-                            .onEnded { value in
-                                checkDrop(name: name, position: value.location, dropZone: dropZone)
-                            }
-                    )
+    private func lensView(name: String, label: String, dropZone: CGRect) -> some
+        View {
+            VStack (spacing: 0) {
+                    Text(label)
+                        .font(.system(size: 30, weight: .bold))
+                        .foregroundStyle(correctLensSelected && name == correctLens ? Color("button2") : Color("text"))
+                        .padding(.top,20)
+                    
+                    Image(name)
+                        .resizable()
+                        .frame(width: lensSize(for: name).width, height: lensSize(for: name).height)
+                        .position(lensPositions[name]!)
+                        .gesture(
+                            DragGesture()
+                                .onChanged { value in
+                                    lensPositions[name] = value.location
+                                }
+                                .onEnded { value in
+                                    checkDrop(name: name, position: value.location, dropZone: dropZone)
+                                }
+                        )
             }
         }
     
     private func checkDrop(name: String, position: CGPoint, dropZone: CGRect) {
         if dropZone.contains(position) {
             if name == correctLens {
+                mutatingDialog = true
+                correctLensSelected = true
                 withAnimation {
                     showExplosion = true
                     rectangleOff = true
@@ -151,6 +193,9 @@ struct HyperopiaView: View {
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     showExplosion = false
+                    if hasChallenge {
+                        dialogIndex = 2
+                    }
                 }
             } else {
                 let generator = UINotificationFeedbackGenerator()

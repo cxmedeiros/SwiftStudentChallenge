@@ -167,16 +167,23 @@ struct DialogData {
     
     static let hyperopia: [Dialog] = [
         Dialog(string: "Now, with hyperopia, the eye focuses the image behind the retina. The result? Nearby objects look blurry!"),
-        Dialog(string: "Which lens can correct hyperopia?"),
+        Dialog(string: "Which lens can correct hyperopia?")
+    ]
+    
+    static let hyperopiaWithLens: [Dialog] = [
         Dialog(string: "Great! A convex lens helps bring the image into focus at the right spot!")
     ]
     
     static let astigmatism: [Dialog] = [
         Dialog(string: "With astigmatism, the cornea has an irregular, slightly oval shape. This causes light to scatter, making vision distorted."),
-        Dialog(string: "Do you know which lens can fix this?"),
+        Dialog(string: "Do you know which lens can fix this?")
+    ]
+    
+    static let astigmatismWithLens: [Dialog] = [
         Dialog(string: "Correct! Cylindrical lenses adjust the way light enters, making the image sharper and clearer."),
         Dialog(string: "Now that we understand these vision problems, let’s see in practice how each person experiences the world!")
     ]
+
 }
 
 
