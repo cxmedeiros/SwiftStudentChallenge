@@ -9,27 +9,14 @@ class SoundManager {
     
     private init() {} // Impede múltiplas instâncias
     
-    // Função para obter o caminho do arquivo (aceita .mp3 e .wav)
-    private func getSoundPath(for soundName: String) -> URL? {
-        let formats = ["mp3", "wav"] // Lista de formatos aceitos
-        
-        for format in formats {
-            if let path = Bundle.main.path(forResource: soundName, ofType: format) {
-                return URL(fileURLWithPath: path)
-            }
-        }
-        
-        return nil // Nenhum arquivo encontrado
-    }
-    
     // Tocar música de fundo repetidamente
     func playBackgroundMusic(soundName: String, volume: Float = 1.0) {
         do {
-            guard let soundFile = getSoundPath(for: soundName) else {
-                print("Arquivo de música de fundo '\(soundName)' não encontrado")
+            guard let path = Bundle.main.path(forResource: soundName, ofType: "wav") else {
+                print("Arquivo de música de fundo não encontrado")
                 return
             }
-            
+            let soundFile = URL(fileURLWithPath: path)
             backgroundPlayer = try AVAudioPlayer(contentsOf: soundFile)
             backgroundPlayer?.volume = max(0.0, min(volume, 1.0))
             backgroundPlayer?.numberOfLoops = -1 // Repetir indefinidamente
@@ -48,11 +35,11 @@ class SoundManager {
     // Tocar efeito sonoro uma única vez
     func playEffect(soundName: String, volume: Float = 1.0) {
         do {
-            guard let soundFile = getSoundPath(for: soundName) else {
-                print("Arquivo de efeito sonoro '\(soundName)' não encontrado")
+            guard let path = Bundle.main.path(forResource: soundName, ofType: "wav") else {
+                print("Arquivo de efeito sonoro não encontrado")
                 return
             }
-            
+            let soundFile = URL(fileURLWithPath: path)
             effectPlayer = try AVAudioPlayer(contentsOf: soundFile)
             effectPlayer?.volume = max(0.0, min(volume, 1.0))
             effectPlayer?.prepareToPlay()

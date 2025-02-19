@@ -199,16 +199,9 @@ struct MyopiaView: View {
                         dialogIndex = 2
                     }
                 }
-            } else {
-                SoundManager.shared.playEffect(soundName: "error-10")
-                let generator = UINotificationFeedbackGenerator()
-                generator.notificationOccurred(.error)
-                
-                withAnimation {
-                    lensPositions[name] = initialPosition(for: name)
-                }
             }
         } else {
+            SoundManager.shared.playEffect(soundName: "error-10")
             withAnimation {
                 lensPositions[name] = initialPosition(for: name)
             }

@@ -27,7 +27,7 @@ struct CustomBackButton: ViewModifier {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-        
+                        SoundManager.shared.playEffect(soundName: "button-click-1")
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         HStack {

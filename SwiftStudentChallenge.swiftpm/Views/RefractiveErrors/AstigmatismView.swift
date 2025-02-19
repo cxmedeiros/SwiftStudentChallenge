@@ -201,17 +201,10 @@ struct AstigmatismView: View {
                         dialogIndex = 2
                     }
                 }
-            } else {
-                SoundManager.shared.playEffect(soundName: "error-10")
-                let generator = UINotificationFeedbackGenerator()
-                generator.notificationOccurred(.error)
-                
-                withAnimation {
-                    lensPositions[name] = initialPosition(for: name)
-                }
             }
         } else {
             withAnimation {
+                SoundManager.shared.playEffect(soundName: "error-10")
                 lensPositions[name] = initialPosition(for: name)
             }
         }
