@@ -13,7 +13,7 @@ struct AstigmatismView: View {
     let hasChallenge: Bool = true
     @State private var showChallenge = false
     @State private var showFinalDialog = false
-    @State var mutatingDialog = false
+    @State var changeDialog = false
     @State private var showDialog = true
     @State private var moveToNextScreen = false
     @State private var correctLensSelected: Bool = false
@@ -114,12 +114,12 @@ struct AstigmatismView: View {
                             
                         }
                         
-                        if mutatingDialog {
+                        if changeDialog {
                             DialogBox(
                                 isVisible: $showDialog,
                                 currentDialogIndex: $dialogIndex,
                                 moveToNextScreen: $moveToNextScreen,
-                                mutatingDialog: $mutatingDialog,
+                                changeDialog: $changeDialog,
                                 currentView: "AstigmatismView",
                                 dialogs:DialogData.astigmatismWithLens,
                                 dialogColor: Color("dialogBallon2")
@@ -129,7 +129,7 @@ struct AstigmatismView: View {
                                 isVisible: $showDialog,
                                 currentDialogIndex: $dialogIndex,
                                 moveToNextScreen: $moveToNextScreen,
-                                mutatingDialog: $mutatingDialog,
+                                changeDialog: $changeDialog,
                                 currentView: "AstigmatismView",
                                 dialogs: DialogData.astigmatism,
                                 dialogColor: Color("dialogBallon2")
@@ -186,7 +186,8 @@ struct AstigmatismView: View {
     private func checkDrop(name: String, position: CGPoint, dropZone: CGRect) {
         if dropZone.contains(position) {
             if name == correctLens {
-                mutatingDialog = true
+                SoundManager.shared.playEffect(soundName: "game-sound-correct")
+                changeDialog = true
                 correctLensSelected = true
                 withAnimation {
                     showExplosion = true
@@ -201,6 +202,7 @@ struct AstigmatismView: View {
                     }
                 }
             } else {
+                SoundManager.shared.playEffect(soundName: "error-10")
                 let generator = UINotificationFeedbackGenerator()
                 generator.notificationOccurred(.error)
                 

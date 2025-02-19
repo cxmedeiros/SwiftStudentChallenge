@@ -8,36 +8,38 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "SwiftStudentChallenge",
+    name: "New Vision",
     platforms: [
         .iOS("16.0")
     ],
     products: [
         .iOSApplication(
-            name: "SwiftStudentChallenge",
+            name: "New Vision",
             targets: ["AppModule"],
             bundleIdentifier: "cxm.SwiftStudentChallenge",
             teamIdentifier: "55NWM5F4XC",
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .asset("AppIcon"),
-            accentColor: .asset("AccentColor"),
+            accentColor: .presetColor(.purple),
             supportedDeviceFamilies: [
                 .pad,
                 .phone
             ],
             supportedInterfaceOrientations: [
                 .portrait,
-                .landscapeRight,
-                .landscapeLeft,
                 .portraitUpsideDown(.when(deviceFamilies: [.pad]))
-            ]
+            ],
+            appCategory: .education
         )
     ],
     targets: [
         .executableTarget(
             name: "AppModule",
-            path: "."
+            path: ".",
+            resources: [
+                .process("Songs")
+            ]
         )
     ],
     swiftLanguageVersions: [.version("6")]

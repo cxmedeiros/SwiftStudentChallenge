@@ -5,7 +5,7 @@ struct DialogBox: View {
     @Binding var isVisible: Bool
     @Binding var currentDialogIndex: Int
     @Binding var moveToNextScreen: Bool
-    @Binding var mutatingDialog: Bool
+    @Binding var changeDialog: Bool
     var currentView: String
     var dialogs: [Dialog]
     var dialogColor: Color
@@ -42,6 +42,7 @@ struct DialogBox: View {
                     
                     HStack{
                         Button(action: {
+                            SoundManager.shared.playEffect(soundName: "button-click-1")
                             moveToNextDialog()
                         }, label: {
                             Image("Arrow")
@@ -110,7 +111,7 @@ struct DialogBox: View {
             currentDialogIndex = dialogsIndex
             startTyping()
         } else if isAllowedView {
-            if mutatingDialog {
+            if changeDialog {
                 moveToNextScreen = true
             }
         } else {

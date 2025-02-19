@@ -35,7 +35,9 @@ struct DifferentsVisionsView: View {
                         .frame(width: 800, height: 107)
                         
                         HStack{
-                            Button(action: {}) {
+                            Button(action: {
+                                SoundManager.shared.playEffect(soundName: "button-click-1")
+                            }) {
                                 ZStack {
                                     Rectangle()
                                         .frame(width: 180, height: 107)
@@ -47,7 +49,9 @@ struct DifferentsVisionsView: View {
                                         .foregroundColor(.white)
                                 }
                             }
-                            Button(action: {}) {
+                            Button(action: {
+                                SoundManager.shared.playEffect(soundName: "button-click-1")
+                            }) {
                                 ZStack {
                                     Rectangle()
                                         .frame(width: 180, height: 107)
@@ -59,7 +63,9 @@ struct DifferentsVisionsView: View {
                                         .foregroundColor(.white)
                                 }
                             }
-                            Button(action: {}) {
+                            Button(action: {
+                                SoundManager.shared.playEffect(soundName: "button-click-1")
+                            }) {
                                 ZStack {
                                     Rectangle()
                                         .frame(width: 180, height: 107)
@@ -71,7 +77,9 @@ struct DifferentsVisionsView: View {
                                         .foregroundColor(.white)
                                 }
                             }
-                            Button(action: {}) {
+                            Button(action: {
+                                SoundManager.shared.playEffect(soundName: "button-click-1")
+                            }) {
                                 ZStack {
                                     Rectangle()
                                         .frame(width: 180, height: 107)
@@ -86,7 +94,9 @@ struct DifferentsVisionsView: View {
                         }
                         
                     }
-                    Button(action: {}) {
+                    Button(action: {
+                        SoundManager.shared.playEffect(soundName: "button-click-1")
+                    }) {
                         ZStack {
                             Rectangle()
                                 .frame(width: 284, height: 67)

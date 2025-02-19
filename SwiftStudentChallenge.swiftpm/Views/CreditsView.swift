@@ -33,7 +33,7 @@ struct CustomBackButton: ViewModifier {
                         HStack {
                             Image(systemName: "chevron.left")
                                 .font(.system(size: 20))
-                            Text("Voltar")
+                            Text("Back")
                                 .font(.system(size: 30))
                         }
                         .foregroundColor(Color("button"))

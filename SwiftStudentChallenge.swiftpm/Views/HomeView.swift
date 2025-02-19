@@ -6,6 +6,7 @@ struct HomeView: View {
     @State private var isNavigating2 = false
     
     var body: some View {
+        
         NavigationStack {
             
             ZStack {
@@ -42,6 +43,7 @@ struct HomeView: View {
                         
                         VStack (spacing: 23.51) {
                             Button(action: {
+                                SoundManager.shared.playEffect(soundName: "button-click-1")
                                 isNavigating = true }) {
                                 ZStack {
                                     Rectangle()
@@ -60,6 +62,7 @@ struct HomeView: View {
                             }
 
                             Button(action: {
+                                SoundManager.shared.playEffect(soundName: "button-click-1")
                                 isNavigating2 = true}) {
                                 ZStack {
                                     Rectangle()
@@ -81,6 +84,13 @@ struct HomeView: View {
                 .padding(.bottom, 100)
             }
         }
+//        .onAppear {
+//            soundManager?.play(loop: true)
+//        }
     }
+}
+
+#Preview {
+    HomeView()
 }
 

@@ -12,7 +12,7 @@ struct RetinaView: View {
     @State private var showDialog = true
     @State private var dialogIndex = 0
     @State private var moveToNextScreen = false
-    @State var mutatingDialog = true
+    @State var changeDialog = true
     
     var body: some View {
         NavigationStack {
@@ -40,7 +40,7 @@ struct RetinaView: View {
                             isVisible: $showDialog,
                             currentDialogIndex: $dialogIndex,
                             moveToNextScreen: $moveToNextScreen,
-                            mutatingDialog: $mutatingDialog,
+                            changeDialog: $changeDialog,
                             currentView: "RetinaView",
                             dialogs: DialogData.retina,
                             dialogColor: Color("dialogBallon2")

@@ -12,7 +12,7 @@ struct MyopiaView: View {
     let hasChallenge: Bool = true
     @State private var showChallenge = false
     @State private var showFinalDialog = false
-    @State var mutatingDialog = false
+    @State var changeDialog = false
     @State private var showDialog = true
     @State private var moveToNextScreen = false
     @State private var correctLensSelected: Bool = false
@@ -112,12 +112,12 @@ struct MyopiaView: View {
                             }
                         }
                         Spacer()
-                        if mutatingDialog {
+                        if changeDialog {
                             DialogBox(
                                 isVisible: $showDialog,
                                 currentDialogIndex: $dialogIndex,
                                 moveToNextScreen: $moveToNextScreen,
-                                mutatingDialog: $mutatingDialog,
+                                changeDialog: $changeDialog,
                                 currentView: "MyopiaView",
                                 dialogs: DialogData.myopiaWithLens,
                                 dialogColor: Color("dialogBallon2")
@@ -127,7 +127,7 @@ struct MyopiaView: View {
                                 isVisible: $showDialog,
                                 currentDialogIndex: $dialogIndex,
                                 moveToNextScreen: $moveToNextScreen,
-                                mutatingDialog: $mutatingDialog,
+                                changeDialog: $changeDialog,
                                 currentView: "MyopiaView",
                                 dialogs: DialogData.myopia,
                                 dialogColor: Color("dialogBallon2")
@@ -184,7 +184,8 @@ struct MyopiaView: View {
     private func checkDrop(name: String, position: CGPoint, dropZone: CGRect) {
         if dropZone.contains(position) {
             if name == correctLens {
-                mutatingDialog = true
+                SoundManager.shared.playEffect(soundName: "game-sound-correct")
+                changeDialog = true
                 correctLensSelected = true
                 withAnimation {
                     showExplosion = true
@@ -199,6 +200,7 @@ struct MyopiaView: View {
                     }
                 }
             } else {
+                SoundManager.shared.playEffect(soundName: "error-10")
                 let generator = UINotificationFeedbackGenerator()
                 generator.notificationOccurred(.error)
                 
