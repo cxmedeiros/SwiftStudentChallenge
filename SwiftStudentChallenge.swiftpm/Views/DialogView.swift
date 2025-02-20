@@ -37,7 +37,7 @@ struct DialogBox: View {
                     Text(text)
                         .font(.custom("SFPro", size: 25))
                         .foregroundStyle(Color("button"))
-                        .frame(maxWidth: 700, alignment: .leading)
+                        .frame(maxWidth: 700, maxHeight: 100, alignment: .leading)
                         .padding(.horizontal, 20)
                     
                     HStack{
@@ -50,10 +50,10 @@ struct DialogBox: View {
                                 .foregroundColor(Color("button"))
                         })
                         .padding(.trailing, 40)
+                        .padding(.bottom, 20)
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
-                .frame(width: 800, height: 150)
             }
             .onAppear {
                 resetDialogBox()
