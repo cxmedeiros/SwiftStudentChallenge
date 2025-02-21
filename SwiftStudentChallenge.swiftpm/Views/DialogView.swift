@@ -35,7 +35,7 @@ struct DialogBox: View {
                 VStack () {
                     
                     Text(text)
-                        .font(.custom("SFPro", size: 25))
+                        .font(.system(size: 25))
                         .foregroundStyle(Color("button"))
                         .frame(maxWidth: 700, maxHeight: 100, alignment: .leading)
                         .padding(.horizontal, 20)
@@ -176,7 +176,7 @@ struct DialogData {
     
     static let astigmatismWithLens: [Dialog] = [
         Dialog(string: "Correct! Cylindrical lenses adjust the way light enters, making the image sharper and clearer."),
-        Dialog(string: "Now that we understand these vision problems, let’s see in practice how each person experiences the world!")
+        Dialog(string: "Now that we understand these vision problems, let's finish by seeing in practice how each person experiences the world!")
     ]
 
 }

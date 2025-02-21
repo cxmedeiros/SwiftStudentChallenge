@@ -2,7 +2,7 @@ import AVFoundation
 
 @MainActor
 class SoundManager {
-    static let shared = SoundManager() // Singleton seguro
+    static let shared = SoundManager() 
 
     private var backgroundPlayer: AVAudioPlayer? // Player para música de fundo
     private var effectPlayer: AVAudioPlayer? // Player para efeitos sonoros

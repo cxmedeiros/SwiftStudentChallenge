@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct HomeView: View {
+struct MenuView: View {
     
     @State private var isNavigating = false
     @State private var isNavigating2 = false
@@ -48,7 +48,7 @@ struct HomeView: View {
                                 ZStack {
                                     Rectangle()
                                         .frame(width: 284, height: 67)
-                                        .foregroundColor(Color(.button))
+                                        .foregroundColor(Color("button"))
                                         .cornerRadius(12.89)
                                         .shadow(radius: 5)
                                     Text("Start")
@@ -67,11 +67,11 @@ struct HomeView: View {
                                 ZStack {
                                     Rectangle()
                                         .frame(width: 284, height: 67)
-                                        .foregroundColor(Color(.button))
+                                        .foregroundColor(Color("button"))
                                         .cornerRadius(12.89)
                                         .shadow(radius: 5)
                                     Text("Credits")
-                                        .font(.system(size: 38, weight: .regular, design: .default))
+                                        .font(.system(size: 38, weight: .regular))
                                         .foregroundColor(.white)
                                 }
                             }
@@ -84,13 +84,7 @@ struct HomeView: View {
                 .padding(.bottom, 100)
             }
         }
-//        .onAppear {
-//            soundManager?.play(loop: true)
-//        }
+        .navigationBarBackButtonHidden(true)
     }
-}
-
-#Preview {
-    HomeView()
 }
 

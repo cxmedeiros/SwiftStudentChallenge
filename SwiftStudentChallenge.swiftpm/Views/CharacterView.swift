@@ -6,11 +6,14 @@ struct CharacterView: View {
     @State private var dialogIndex = 0
     @State private var moveToNextScreen = false
     @State var changeDialog = true
+    
     var body: some View {
         NavigationStack {
+            
             ZStack {
                 Color("menu")
                     .ignoresSafeArea()
+                
                 VStack {
                     HStack(spacing: 100){
                         Image("ColorBlindnessTest")
@@ -33,6 +36,7 @@ struct CharacterView: View {
                 }
                 VStack (spacing: 0){
                     Image("Mila")
+                        .padding(.top, 50)
                     DialogBox(
                         isVisible: $showDialog,
                         currentDialogIndex: $dialogIndex,
@@ -44,6 +48,7 @@ struct CharacterView: View {
                     )
                     
                 }
+                .padding(.bottom, 50)
                 
             }
             .navigationDestination(isPresented: $moveToNextScreen) {
