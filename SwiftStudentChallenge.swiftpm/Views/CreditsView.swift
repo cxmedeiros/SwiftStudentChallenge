@@ -1,27 +1,26 @@
 import SwiftUI
 
-//struct CreditsView: View {
-//    
-//    var body: some View {
-//        
-//        NavigationStack {
-//            
-//            ZStack {
-//                
-//                Color("menu")
-//                    .ignoresSafeArea()
-//    
-//            }
-            
-//        }
-//    }
-//}
-//
-struct CustomBackButton: ViewModifier {
-    @Environment(\.presentationMode) var presentationMode
+struct CreditsView: View {
     
-    func body(content: Content) -> some View {
-        content
+    @State private var currentIndex = 0
+    @Environment(\.presentationMode) var presentationMode
+
+    let pages: [AnyView] = [
+        AnyView(CreditPage()),
+    ]
+    
+    var body: some View {
+        NavigationStack {
+            ZStack {
+                Color("menu")
+                    .ignoresSafeArea()
+            
+                ScrollView {
+                   
+                    CreditPage()
+                    
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
@@ -38,64 +37,156 @@ struct CustomBackButton: ViewModifier {
                     }
                 }
             }
-    }
-}
-
-struct CreditsView: View {
-    let creditTexts = [
-        "Desenvolvido por: Camila",
-        "Design: Equipe Criativa",
-        "Apoio: Amigos e Família",
-        "Obrigado por jogar!"
-    ]
-    
-    var body: some View {
-        
-        NavigationStack {
-            ZStack {
-                Color("menu")
-                    .ignoresSafeArea()
-                Image("Background")
-                    .resizable()
-                    .scaledToFit()
-                    .overlay(
-                        // TabView passando dentro das lentes do óculos
-                        CreditsScrollingText()
-                    )
-         
-                  
-            }
-            .modifier(CustomBackButton())
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)
         }
     }
 }
 
-struct CreditsScrollingText: View {
-    let creditTexts = [
-        "Desenvolvido por: Camila",
-        "Design: Equipe Criativa",
-        "Apoio: Amigos e Família",
-        "Obrigado por jogar!"
-    ]
-    
+struct CreditPage: View {
     var body: some View {
-        TabView {
-            ForEach(creditTexts, id: \.self) { text in
-                Text(text)
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundColor(.black)
-                    .frame(width: 280, height: 100)
+        
+        VStack (spacing: 40) {
+            
+            Text("Credits")
+                .font(.custom(MyCustomFonts.textFont.fontName, size: 72))
+                .foregroundColor(Color("button"))
+            
+            ZStack {
+                Rectangle()
+                    .frame(width: 810, height: 202)
+                    .cornerRadius(20)
+                    .foregroundStyle(Color("rectangle2"))
+                    
+                    HStack(spacing: 30){
+                        
+                        Image("Mila2")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 132, height: 180)
+                        
+                        Text("I'm Camila, a 22 year old computer engineering student from Brazil. I'm passionate about integrating education, health, and technology!")
+                            .multilineTextAlignment(.center)
+                            .font(.system(size: 28, weight: .regular))
+                            .frame(width: 394)
+                            .foregroundColor(.white)
+                }
+            }
+            
+            HStack{
+                VStack{
+                    Text("Assets & Illustrations")
+                        .font(.system(size: 28, weight: .semibold))
+                        .foregroundColor(Color("button"))
+                    
+                    ZStack {
+                        Rectangle()
+                            .frame(width: 402, height: 202)
+                            .cornerRadius(20)
+                            .foregroundStyle(Color("button"))
+                        Text("Made by Camila Xavier (me) specially for this project, but I had inspiration from websites such as Pinterest and Freepik.")
+                            .frame(width: 355, height: 198)
+                            .font(.system(size: 28, weight: .regular))
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.white)
+                    }
+                }
+                
+                VStack {
+                    Text("Code Reference")
+                        .font(.system(size: 28, weight: .semibold))
+                        .foregroundColor(Color("button"))
+                    ZStack {
+                        Rectangle()
+                            .frame(width: 402, height: 202)
+                            .cornerRadius(20)
+                            .foregroundStyle(Color("button"))
+                            .foregroundStyle(Color("button"))
+                        Text("Swift Playground: Animating Shapes - Explosion Animarion Author: Apple")
+                            .frame(width: 355, height: 198)
+                            .font(.system(size: 28, weight: .regular))
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.white)
+                    }
+                }
+            }
+            
+            ZStack {
+                VStack{
+                    Text("Sounds")
+                        .font(.system(size: 28, weight: .semibold))
+                        .foregroundColor(Color("button"))
+                    Rectangle()
+                        .frame(width: 810, height: 385)
+                        .cornerRadius(20)
+                        .foregroundStyle(Color("rectangle2"))
+                }
+                
+                Text("""
+                     Relaxing Light Background (loop ver.2) by AudioCoffee -` https://freesound.org/s/725613/` - License: Attribution NonCommercial 4.0
+                     
+                     Button Click 1.wav by Mellau - `https://freesound.org/s/506054/` - License: Attribution NonCommercial 4.0
+                     
+                     Error #10 by Universfield - `https://freesound.org/s/734446/` - License: Attribution 4.0
+                     
+                     Game Sound Correct.wav by Bertrof - `https://freesound.org/s/131660/` - License: Attribution 3.0
+                     """)
+                        .padding(.top, 40)
+                        .frame(width: 743, height: 385)
+                        .font(.system(size: 23, weight: .regular))
+                        .foregroundColor(.white)
+            }
+            
+            VStack {
+                VStack {
+                    Text("References")
+                        .font(.system(size: 28, weight: .semibold))
+                        .foregroundColor(Color("button"))
+                        
+                    ZStack {
+                        Rectangle()
+                            .frame(width: 810, height: 586)
+                            .cornerRadius(20)
+                            .foregroundStyle(Color("button"))
+                        
+                        Text("""
+                             Everything that “New Vision” teaches was found in articles on anatomy and morphology of the human visual system and the study of optical lenses for correcting vision problems.
+                             
+                             H. E. A. Bicas, “Morfologia do sistema visual,” Medicina (Ribeirão Preto), vol. 30, no. 1, pp. 7–15, Mar. 1997, doi: 10.11606/issn.2176-7262.v30i1p7-15.
+
+                             D. Wolfart, O estudo de lentes ópticas associadas à correção da visão humana no ensino de óptica geométrica, Bachelor's Degree in Physics, International University Center UNINTER, Curitiba, Brazil, 2017. Available at: `https://repositorio.uninter.com/bitstream/handle/1/1122/DAINARA%20WOLFART_2821068.pdf.`
+                             """)
+                                .frame(width: 743, height: 586)
+                                .font(.system(size: 28, weight: .regular))
+                                .foregroundColor(.white)
+                    }
+                }
+            }
+            VStack {
+                Text("Fonts")
+                    .font(.system(size: 28, weight: .semibold))
+                    .foregroundColor(Color("button"))
+                
+                ZStack {
+                    Rectangle()
+                        .frame(width: 638, height: 340)
+                        .cornerRadius(20)
+                        .foregroundStyle(Color("rectangle2"))
+                    
+                    Text("""
+                             Copyright (c) 2011, Pablo Impallari (`www.impallari.com|impallari@gmail.com`), Rodrigo Fuenzalida ('www.rfuenzalida.com') with Reserved Font Name Cantora -  SIL Open Font License, Version 1.1.
+                             
+                             SF Pro (`https://developer.apple.com/fonts/`)
+                             """)
+                    .frame(width: 638, height: 340)
+                    .font(.system(size: 28, weight: .regular))
+                    .foregroundColor(.white)
+                }
             }
         }
-        .frame(width: 280, height: 100)
-        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
     }
 }
 
 #Preview {
     CreditsView()
 }
-

@@ -158,11 +158,11 @@ struct HyperopiaView: View {
     
     private func lensView(name: String, label: String, dropZone: CGRect) -> some
         View {
-            VStack (spacing: 0) {
+            VStack (spacing: -10) {
                     Text(label)
                     .font(.system(size: 30, weight: .semibold))
                         .foregroundStyle(correctLensSelected && name == correctLens ? Color("button2") : Color("text"))
-                        .padding(.top,20)
+                        .padding(.top, 20)
                     
                     Image(name)
                         .resizable()

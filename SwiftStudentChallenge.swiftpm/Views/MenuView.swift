@@ -16,14 +16,25 @@ struct MenuView: View {
                 
                 VStack(spacing: 0){
 
-                
-                    ZStack {
-                        Image("Name")
-                            .padding(.trailing,50)
-                        OpenCloseEye()
-                            .padding(.leading, 180)
-                            .padding(.top, 140)
+                    VStack(spacing: -60) {
+                        Image("New")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 208, height: 132)
+                            .padding(.trailing, 400)
+                        HStack {
+                            Text("Visi")
+                                .font(.custom(MyCustomFonts.textFont.fontName, size: 135))
+                                .foregroundStyle(Color("button"))
+                            OpenCloseEye()
+                                .padding(.bottom, 30)
+                            Text("n")
+                                .font(.custom(MyCustomFonts.textFont.fontName, size: 135))
+                                .foregroundStyle(Color("button"))
+                        }
                     }
+                    .padding(.top, 60)
+
                             
                     HStack(spacing: 100){
                         Image("ColorBlindnessTest")

@@ -22,7 +22,7 @@ struct DifferentsVisionsView: View {
                 VStack(spacing: 100){
                     Spacer()
                     Text("How Each Person Sees the World")
-                        .font(.system(size: 40, weight: .medium))
+                        .font(.custom(MyCustomFonts.textFont.fontName, size: 56))
                         .foregroundStyle(Color("button"))
                     
                     ZStack {
@@ -89,7 +89,7 @@ struct VisionButton: View {
             ZStack {
                 Rectangle()
                     .frame(width: 180, height: 107)
-                    .foregroundColor(Color("button2"))
+                    .foregroundColor(selectedVision == type ? Color("button") : Color("button2"))
                     .cornerRadius(12.89)
                     .shadow(radius: 5)
                 Text(title)
@@ -98,4 +98,8 @@ struct VisionButton: View {
             }
         }
     }
+}
+
+#Preview {
+    DifferentsVisionsView()
 }
