@@ -16,11 +16,9 @@ struct RetinaView: View {
     
     var body: some View {
         NavigationStack {
-            
             ZStack {
                 Color("menu")
                     .ignoresSafeArea()
-                
                 VStack {
                     Spacer()
                     VStack (alignment: .center, spacing: 100) {
@@ -28,14 +26,10 @@ struct RetinaView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 500, height: 500)
-                        
-                        
                         Projector()
-                            
                     }
-                    
                     Spacer()
-                    VStack (spacing: 0){
+                    VStack(spacing: 0) {
                         DialogBox(
                             isVisible: $showDialog,
                             currentDialogIndex: $dialogIndex,

@@ -1,10 +1,3 @@
-//
-//  Hyperopia.swift
-//  SwiftStudentChallenge
-//
-//  Created by Camila Xavier de Medeiros on 14/02/25.
-//
-
 import SwiftUI
 
 struct HyperopiaView: View {
@@ -18,11 +11,8 @@ struct HyperopiaView: View {
     @State private var correctLensSelected: Bool = false
     @State private var showExplosion = false
     @State private var rectangleOff = false
-    
     @State private var dialogIndex = 0
     @State private var eyeImage = "Hyperopia"
-    
-    
     @State private var correctLens = "ConvexLens"
     @State private var draggedLens: String? = nil
     @State private var lensPositions: [String: CGPoint] = [
@@ -33,49 +23,37 @@ struct HyperopiaView: View {
    
     var body: some View {
         NavigationStack {
-            
             ZStack {
                 Color("menu")
                     .ignoresSafeArea()
-                
-                VStack (spacing: 0) {
-                    VStack (spacing: 100) {
-                        
+                VStack(spacing: 0) {
+                    VStack(spacing: 100) {
                         if showChallenge {
                             ZStack {
-                                
                                 VStack {
                                     HStack {
                                         Image("Star2")
                                         Spacer()
                                     }
-                                   
                                     HStack {
                                         Spacer()
                                         Image("Star2")
-                                        
                                     }
                                 }
                                 .frame(width: 750, height: 190)
-                                
                                 Rectangle()
                                     .foregroundStyle(Color("rectangle"))
                                     .frame(width: 677, height: 130)
                                     .cornerRadius(30)
-                                
                                Text("Drag the correct lens into the rectangle \n to correct Hyperopia!")
                                    .multilineTextAlignment(.center)
                                    .font(.system(size: 30, weight: .semibold))
                                    .foregroundStyle(Color("text"))
-                                
                             }
                             .padding(.top, 50)
                         }
-                        
                         let dropZone = CGRect(x: -50, y: -300, width: 150, height: 250)
-                        
-                        VStack (alignment: .center) {
-                            
+                        VStack(alignment: .center) {
                             Spacer()
                             ZStack {
                                 if !rectangleOff && showChallenge {
@@ -83,23 +61,17 @@ struct HyperopiaView: View {
                                         .stroke(Color("text"), lineWidth: 2)
                                         .frame(width: 113, height: 237)
                                         .padding(.trailing, 200)
-                                    
                                 }
-                                
                                 if rectangleOff {
                                     ExplodingView()
                                         .transition(.scale)
                                 }
-                                
                                 Image(eyeImage)
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 690, height: 340)
-                                
                             }
-                            
                             Spacer()
-                            
                             if showChallenge {
                                 HStack() {
                                     lensView(name: "ConcaveLens", label: "Concave Lens", dropZone: dropZone)
@@ -110,7 +82,6 @@ struct HyperopiaView: View {
                             }
                         }
                         Spacer()
-                        
                         if changeDialog {
                             DialogBox(
                                 isVisible: $showDialog,
@@ -155,15 +126,13 @@ struct HyperopiaView: View {
         }
         .navigationBarBackButtonHidden(true)
     }
-    
     private func lensView(name: String, label: String, dropZone: CGRect) -> some
         View {
-            VStack (spacing: -10) {
+            VStack(spacing: -10) {
                     Text(label)
                     .font(.system(size: 30, weight: .semibold))
                         .foregroundStyle(correctLensSelected && name == correctLens ? Color("button2") : Color("text"))
                         .padding(.top, 20)
-                    
                     Image(name)
                         .resizable()
                         .frame(width: lensSize(for: name).width, height: lensSize(for: name).height)
@@ -179,7 +148,6 @@ struct HyperopiaView: View {
                         )
             }
         }
-    
     private func checkDrop(name: String, position: CGPoint, dropZone: CGRect) {
         if dropZone.contains(position) {
             if name == correctLens {
@@ -206,23 +174,21 @@ struct HyperopiaView: View {
             }
         }
     }
-
-    
     private func initialPosition(for name: String) -> CGPoint {
-            switch name {
+        switch name {
             case "ConcaveLens": return CGPoint(x: 130, y: 100)
             case "ConvexLens": return CGPoint(x: 130, y: 100)
             case "CylindricalLens": return CGPoint(x: 130, y: 100)
             default: return .zero
-            }
         }
     }
+}
 
 private func lensSize(for name: String) -> CGSize {
     switch name {
-    case "ConcaveLens": return CGSize(width: 56, height: 127)
-    case "ConvexLens": return CGSize(width: 59, height: 127)
-    case "CylindricalLens": return CGSize(width: 79, height: 127)
-    default: return CGSize(width: 100, height: 100)
+        case "ConcaveLens": return CGSize(width: 56, height: 127)
+        case "ConvexLens": return CGSize(width: 59, height: 127)
+        case "CylindricalLens": return CGSize(width: 79, height: 127)
+        default: return CGSize(width: 100, height: 100)
     }
 }

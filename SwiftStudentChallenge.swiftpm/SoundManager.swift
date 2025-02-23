@@ -4,12 +4,12 @@ import AVFoundation
 class SoundManager {
     static let shared = SoundManager() 
 
-    private var backgroundPlayer: AVAudioPlayer? // Player para música de fundo
-    private var effectPlayer: AVAudioPlayer? // Player para efeitos sonoros
+    private var backgroundPlayer: AVAudioPlayer? // Player for background music
+    private var effectPlayer: AVAudioPlayer? // Player for sound effects
     
-    private init() {} // Impede múltiplas instâncias
+    private init() {}
     
-    // Tocar música de fundo repetidamente
+    // Play background music, on repeat
     func playBackgroundMusic(soundName: String, volume: Float = 1.0) {
         do {
             guard let path = Bundle.main.path(forResource: soundName, ofType: "wav") else {
@@ -27,12 +27,12 @@ class SoundManager {
         }
     }
     
-    // Parar música de fundo
+    // Stop Background music
     func stopBackgroundMusic() {
         backgroundPlayer?.stop()
     }
     
-    // Tocar efeito sonoro uma única vez
+    // Play the sound effects only once
     func playEffect(soundName: String, volume: Float = 1.0) {
         do {
             guard let path = Bundle.main.path(forResource: soundName, ofType: "wav") else {

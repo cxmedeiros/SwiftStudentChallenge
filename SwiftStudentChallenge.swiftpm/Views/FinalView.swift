@@ -1,18 +1,17 @@
 import SwiftUI
 
-struct CharacterView: View {
+struct FinalView: View {
     
     @State private var showDialog = true
-    @State private var dialogIndex = 0
     @State private var moveToNextScreen = false
     @State var changeDialog = true
+    @State private var dialogIndex = 0
     
     var body: some View {
         NavigationStack {
             ZStack {
                 Color("menu")
                     .ignoresSafeArea()
-                
                 VStack {
                     HStack(spacing: 100){
                         Image("ColorBlindnessTest")
@@ -20,7 +19,7 @@ struct CharacterView: View {
                         Image("VisionProblemTest")
                     }
                     .opacity(0.45)
-                    VStack(spacing: 50){
+                    VStack(spacing: 50) {
                         HStack (alignment: .bottom){
                             Image("OphthalmologistChair")
                                 .resizable()
@@ -41,20 +40,18 @@ struct CharacterView: View {
                         currentDialogIndex: $dialogIndex,
                         moveToNextScreen: $moveToNextScreen,
                         changeDialog: $changeDialog,
-                        currentView: "CharacterView",
-                        dialogs: DialogData.intro,
+                        currentView: "FinalView",
+                        dialogs: DialogData.final,
                         dialogColor: Color("dialogBallon1")
                     )
+                    
                 }
                 .padding(.bottom, 50)
-                
             }
             .navigationDestination(isPresented: $moveToNextScreen) {
-                CorneaPupilIrisView()
+                MenuView()
             }
         }
         .navigationBarBackButtonHidden(true)
     }
-    
 }
-

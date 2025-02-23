@@ -59,7 +59,6 @@ struct Window: View {
 struct MagnifyngGlass: View {
     @State private var imageIndex = 0
     @State private var showNextImage = false
-    
     @State private var timer: Timer?
     
     let images = ["MagnifyngGlass", "MagnifyngGlassCloseUp"]
@@ -140,6 +139,36 @@ struct Arrow: View {
     }
 }
 
+struct SplashScreen: View {
+    @State private var imageIndex = 0
+    @State private var showNextImage = false
+    @State private var timer: Timer?
+    
+    let images = ["SplashScreen1", "SplashScreen2"]
+
+    var body: some View {
+        HStack (alignment: .center){
+            Image(images[imageIndex])
+                .resizable()
+                .scaledToFit()
+                .frame(width: 881, height: 1024)
+                .padding(.leading, 200)
+                .onAppear {
+                    timer = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true) { _ in
+                        DispatchQueue.main.async {
+                            showNextImage.toggle()
+                            imageIndex = (imageIndex + 1) % images.count
+                        }
+                    }
+                }
+                .onDisappear {
+                    timer?.invalidate()
+                    timer = nil
+                }
+        }
+    }
+}
+
 struct ExplodingView: View {
 
     let colors: [Color] = [Color("button"), Color("rectangle"), Color("star"), Color("text")]
@@ -170,3 +199,5 @@ struct ExplodingView: View {
         }
     }
 }
+
+

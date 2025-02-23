@@ -13,7 +13,6 @@ struct DialogBox: View {
     var isAllowedView: Bool {
         return allowedViews.contains(currentView)
     }
-    
     @State private var text: String = ""
     @State private var dialogsIndex: Int = 0
     @State private var characterIndex: Int = 0
@@ -21,26 +20,20 @@ struct DialogBox: View {
     @State private var isAnimating: Bool = false
     
     var body: some View {
-        
         if isVisible {
-            
             ZStack {
-                
                 Rectangle()
-                    .frame(width: 800, height:150)
+                    .frame(width: 800, height: 150)
                     .foregroundColor(dialogColor)
                     .cornerRadius(12.89)
                     .shadow(radius: 5)
-                
-                VStack () {
-                    
+                VStack() {
                     Text(text)
                         .font(.system(size: 25))
                         .foregroundStyle(Color("button"))
                         .frame(maxWidth: 700, maxHeight: 100, alignment: .leading)
                         .padding(.horizontal, 20)
-                    
-                    HStack{
+                    HStack {
                         Button(action: {
                             SoundManager.shared.playEffect(soundName: "button-click-1")
                             moveToNextDialog()
@@ -65,7 +58,6 @@ struct DialogBox: View {
             }
         }
     }
-    
     private func resetDialogBox() {
         text = ""
         dialogsIndex = 0
@@ -73,7 +65,6 @@ struct DialogBox: View {
         isAnimating = false
         startTyping()
     }
-    
     private func startTyping() {
         stopTimer()
         characterIndex = 0
@@ -93,12 +84,10 @@ struct DialogBox: View {
             }
         }
     }
-    
     private func stopTimer() {
         timer?.invalidate()
         timer = nil
     }
-    
     private func moveToNextDialog() {
         if isAnimating {
             let remainingText = dialogs[dialogsIndex].string.suffix(dialogs[dialogsIndex].string.count - characterIndex)
@@ -120,7 +109,6 @@ struct DialogBox: View {
     }
 }
 
-
 struct Dialog {
     let string: String
 }
@@ -130,58 +118,48 @@ struct DialogData {
         Dialog(string: "Hi, my name is Mila, and I'm an ophthalmologist!"),
         Dialog(string: "Let’s learn a little more about our eyes and why millions of people, like me, wear glasses.")
     ]
-    
     static let corneaPupilIris: [Dialog] = [
         Dialog(string: "Imagine the eye as a window."),
-        Dialog(string: "The cornea is the glass, allowing light to enter. But this light needs control, right?"),
-        Dialog(string: "That’s where the pupil and iris come in, like a curtain that opens and closes to adjust the amount of light.")
+        Dialog(string: "The cornea is the glass, allowing light to enter. But this light needs control."),
+        Dialog(string: "That’s where the pupil and iris come in, like a curtain that opens and closes to adjust the amount of light. Amazing, right?")
     ]
-    
     static let lens: [Dialog] = [
         Dialog(string: "Inside the eye, we have natural lenses that work like magnifying glasses, adjusting the focus so we can see clearly.")
     ]
-    
     static let retina: [Dialog] = [
         Dialog(string: "And where is this image projected?"),
-        Dialog(string: "At the back of the eye, on the retina, which works like a movie screen! It captures images and sends them to the brain. Amazing, right?")
+        Dialog(string: "At the back of the eye, on the retina, which works like a movie screen! It captures images and sends them to the brain.")
     ]
-    
     static let correctVision: [Dialog] = [
         Dialog(string: "When everything works properly, the image is focused perfectly on the retina, and you see the world clearly."),
         Dialog(string: "But sometimes, our eyes need a little help...")
     ]
-    
     static let myopia: [Dialog] = [
-        Dialog(string: "People with myopia see well up close, but distant objects appear blurry."),
+        Dialog(string: "People with Myopia see well up close, but distant objects appear blurry."),
         Dialog(string: "Let’s try a challenge! Which lens can fix this?"),
     ]
-    
     static let myopiaWithLens: [Dialog] = [
-        Dialog(string: "That’s right! A concave lens spreads the light a little before it reaches the eye, placing the image in the right spot!")
+        Dialog(string: "That’s right! A Concave lens spreads the light a little before it reaches the eye, placing the image in the right spot!")
     ]
-    
     static let hyperopia: [Dialog] = [
-        Dialog(string: "Now, with hyperopia, the eye focuses the image behind the retina. The result? Nearby objects look blurry!"),
+        Dialog(string: "Now, with Hyperopia, the eye focuses the image behind the retina. The result? Nearby objects look blurry!"),
         Dialog(string: "Which lens can correct hyperopia?")
     ]
-    
     static let hyperopiaWithLens: [Dialog] = [
-        Dialog(string: "Great! A convex lens helps bring the image into focus at the right spot!")
+        Dialog(string: "Great! A Convex lens helps bring the image into focus at the right spot!")
     ]
-    
     static let astigmatism: [Dialog] = [
-        Dialog(string: "With astigmatism, the cornea has an irregular, slightly oval shape. This causes light to scatter, making vision distorted."),
+        Dialog(string: "With Astigmatism, the cornea has an irregular, slightly oval shape. This causes light to scatter, making vision distorted."),
         Dialog(string: "Do you know which lens can fix this?")
     ]
-    
     static let astigmatismWithLens: [Dialog] = [
         Dialog(string: "Correct! Cylindrical lenses adjust the way light enters, making the image sharper and clearer."),
         Dialog(string: "Now that we understand these vision problems, let's finish by seeing in practice how each person experiences the world!")
     ]
-
+    static let final: [Dialog] = [
+        Dialog(string: "I hope you learned about the eye's structure, vision problems, and how lenses help regulate our vision. Thanks, see you later!"),
+    ]
 }
-
-
 
 
 

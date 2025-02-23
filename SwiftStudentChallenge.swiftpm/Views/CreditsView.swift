@@ -15,7 +15,7 @@ struct CreditsView: View {
                 Color("menu")
                     .ignoresSafeArea()
             
-                ScrollView {
+                ScrollView (.vertical, showsIndicators: false) {
                    
                     CreditPage()
                     
@@ -44,84 +44,81 @@ struct CreditsView: View {
 }
 
 struct CreditPage: View {
+    
     var body: some View {
-        
-        VStack (spacing: 40) {
-            
+        VStack(spacing: 40) {
             Text("Credits")
                 .font(.custom(MyCustomFonts.textFont.fontName, size: 72))
                 .foregroundColor(Color("button"))
-            
             ZStack {
                 Rectangle()
-                    .frame(width: 810, height: 202)
+                    .frame(width: 780, height: 202)
                     .cornerRadius(20)
                     .foregroundStyle(Color("rectangle2"))
-                    
-                    HStack(spacing: 30){
-                        
-                        Image("Mila2")
+                    HStack(spacing: 30) {
+                        Image("Character2")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 132, height: 180)
                         
                         Text("I'm Camila, a 22 year old computer engineering student from Brazil. I'm passionate about integrating education, health, and technology!")
                             .multilineTextAlignment(.center)
-                            .font(.system(size: 28, weight: .regular))
+                            .font(.system(size: 24, weight: .regular))
                             .frame(width: 394)
                             .foregroundColor(.white)
                 }
             }
-            
-            HStack{
-                VStack{
+            HStack {
+                VStack {
                     Text("Assets & Illustrations")
                         .font(.system(size: 28, weight: .semibold))
                         .foregroundColor(Color("button"))
-                    
                     ZStack {
                         Rectangle()
-                            .frame(width: 402, height: 202)
+                            .frame(width: 390, height: 225)
                             .cornerRadius(20)
                             .foregroundStyle(Color("button"))
                         Text("Made by Camila Xavier (me) specially for this project, but I had inspiration from websites such as Pinterest and Freepik.")
-                            .frame(width: 355, height: 198)
-                            .font(.system(size: 28, weight: .regular))
+                            .frame(width: 355, height: 220)
+                            .font(.system(size: 22, weight: .regular))
                             .multilineTextAlignment(.center)
                             .foregroundColor(.white)
                     }
                 }
-                
                 VStack {
                     Text("Code Reference")
                         .font(.system(size: 28, weight: .semibold))
                         .foregroundColor(Color("button"))
                     ZStack {
                         Rectangle()
-                            .frame(width: 402, height: 202)
+                            .frame(width: 390, height: 225)
                             .cornerRadius(20)
                             .foregroundStyle(Color("button"))
                             .foregroundStyle(Color("button"))
-                        Text("Swift Playground: Animating Shapes - Explosion Animarion Author: Apple")
-                            .frame(width: 355, height: 198)
-                            .font(.system(size: 28, weight: .regular))
+                        Text("""
+                Animating Shapes (Explosion Animarion) - APPLE INC.
+                SWIFT PLAYGROUNDS SOFTWARE LICENSE AGREEMENT
+                
+                Placing Custom Font: MIT License
+                Copyright (c) 2022 Alessandra Luana Nascimento Pereira.
+                """)
+                            .frame(width: 355, height: 220)
+                            .font(.system(size: 22, weight: .regular))
                             .multilineTextAlignment(.center)
                             .foregroundColor(.white)
                     }
                 }
             }
-            
             ZStack {
-                VStack{
+                VStack {
                     Text("Sounds")
                         .font(.system(size: 28, weight: .semibold))
                         .foregroundColor(Color("button"))
                     Rectangle()
-                        .frame(width: 810, height: 385)
+                        .frame(width: 780, height: 385)
                         .cornerRadius(20)
                         .foregroundStyle(Color("rectangle2"))
                 }
-                
                 Text("""
                      Relaxing Light Background (loop ver.2) by AudioCoffee -` https://freesound.org/s/725613/` - License: Attribution NonCommercial 4.0
                      
@@ -133,22 +130,19 @@ struct CreditPage: View {
                      """)
                         .padding(.top, 40)
                         .frame(width: 743, height: 385)
-                        .font(.system(size: 23, weight: .regular))
+                        .font(.system(size: 22, weight: .regular))
                         .foregroundColor(.white)
             }
-            
             VStack {
                 VStack {
                     Text("References")
                         .font(.system(size: 28, weight: .semibold))
                         .foregroundColor(Color("button"))
-                        
                     ZStack {
                         Rectangle()
-                            .frame(width: 810, height: 586)
+                            .frame(width: 780, height: 386)
                             .cornerRadius(20)
                             .foregroundStyle(Color("button"))
-                        
                         Text("""
                              Everything that “New Vision” teaches was found in articles on anatomy and morphology of the human visual system and the study of optical lenses for correcting vision problems.
                              
@@ -156,37 +150,31 @@ struct CreditPage: View {
 
                              D. Wolfart, O estudo de lentes ópticas associadas à correção da visão humana no ensino de óptica geométrica, Bachelor's Degree in Physics, International University Center UNINTER, Curitiba, Brazil, 2017. Available at: `https://repositorio.uninter.com/bitstream/handle/1/1122/DAINARA%20WOLFART_2821068.pdf.`
                              """)
-                                .frame(width: 743, height: 586)
-                                .font(.system(size: 28, weight: .regular))
+                                .frame(width: 743, height: 386)
+                                .font(.system(size: 22, weight: .regular))
                                 .foregroundColor(.white)
                     }
                 }
             }
-            VStack {
+            VStack() {
                 Text("Fonts")
                     .font(.system(size: 28, weight: .semibold))
                     .foregroundColor(Color("button"))
-                
                 ZStack {
                     Rectangle()
-                        .frame(width: 638, height: 340)
+                        .frame(width: 780, height: 200)
                         .cornerRadius(20)
                         .foregroundStyle(Color("rectangle2"))
-                    
                     Text("""
                              Copyright (c) 2011, Pablo Impallari (`www.impallari.com|impallari@gmail.com`), Rodrigo Fuenzalida ('www.rfuenzalida.com') with Reserved Font Name Cantora -  SIL Open Font License, Version 1.1.
                              
                              SF Pro (`https://developer.apple.com/fonts/`)
                              """)
-                    .frame(width: 638, height: 340)
-                    .font(.system(size: 28, weight: .regular))
+                    .frame(width: 745, height: 200)
+                    .font(.system(size: 22, weight: .regular))
                     .foregroundColor(.white)
                 }
             }
         }
     }
-}
-
-#Preview {
-    CreditsView()
 }

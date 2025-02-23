@@ -3,6 +3,7 @@ import SwiftUI
 struct DifferentsVisionsView: View {
     
     @State private var moveToNextScreen = false
+    @State private var selectedVision: VisionType = .correct
     
     enum VisionType: String {
         case correct = "ScenarioCorrectVision"
@@ -11,20 +12,16 @@ struct DifferentsVisionsView: View {
         case astigmatism = "ScenarioAstigmatism"
     }
     
-    @State private var selectedVision: VisionType = .correct
-    
     var body: some View {
         NavigationStack {
             ZStack {
                 Color("menu")
                     .ignoresSafeArea()
-                
                 VStack(spacing: 100){
                     Spacer()
                     Text("How Each Person Sees the World")
                         .font(.custom(MyCustomFonts.textFont.fontName, size: 56))
                         .foregroundStyle(Color("button"))
-                    
                     ZStack {
                         VStack {
                             HStack {
@@ -37,7 +34,6 @@ struct DifferentsVisionsView: View {
                             }
                         }
                         .frame(width: 800, height: 107)
-                        
                         HStack {
                             VisionButton(title: "Correct \n Vision", type: .correct, selectedVision: $selectedVision)
                             VisionButton(title: "Myopia", type: .myopia, selectedVision: $selectedVision)
@@ -45,11 +41,9 @@ struct DifferentsVisionsView: View {
                             VisionButton(title: "Astigmatism", type: .astigmatism, selectedVision: $selectedVision)
                         }
                     }
-                    
                     Image(selectedVision.rawValue)
                         .resizable()
                         .scaledToFit()
-                    
                     Button(action: {
                         moveToNextScreen = true
                         SoundManager.shared.playEffect(soundName: "button-click-1")
@@ -60,13 +54,13 @@ struct DifferentsVisionsView: View {
                                 .foregroundColor(Color("button"))
                                 .cornerRadius(12.89)
                                 .shadow(radius: 5)
-                            Text("Menu")
+                            Text("Next")
                                 .font(.system(size: 38, weight: .regular))
                                 .foregroundColor(.white)
                         }
                     }
                     .navigationDestination(isPresented: $moveToNextScreen) {
-                        MenuView()
+                        FinalView()
                     }
                     .padding()
                 }
@@ -77,6 +71,7 @@ struct DifferentsVisionsView: View {
 }
 
 struct VisionButton: View {
+    
     let title: String
     let type: DifferentsVisionsView.VisionType
     @Binding var selectedVision: DifferentsVisionsView.VisionType
@@ -98,8 +93,4 @@ struct VisionButton: View {
             }
         }
     }
-}
-
-#Preview {
-    DifferentsVisionsView()
 }

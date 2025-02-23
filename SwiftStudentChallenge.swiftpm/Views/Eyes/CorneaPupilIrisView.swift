@@ -1,10 +1,3 @@
-//
-//  EyeView.swift
-//  SwiftStudentChallenge
-//
-//  Created by Camila Xavier de Medeiros on 12/02/25.
-//
-
 import SwiftUI
 
 struct CorneaPupilIrisView: View {
@@ -16,23 +9,20 @@ struct CorneaPupilIrisView: View {
     
     var body: some View {
         NavigationStack {
-            
             ZStack {
                 Color("menu")
                     .ignoresSafeArea()
-                
                 VStack {
                     Spacer()
-                    VStack (alignment: .center, spacing: 100) {
+                    VStack(alignment: .center, spacing: 100) {
                         Image("CorneaPupilIris")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 500, height: 500)
-                        
                         Window()
                     }
                     Spacer()
-                    VStack (spacing: 0){
+                    VStack(spacing: 0) {
                         DialogBox(
                             isVisible: $showDialog,
                             currentDialogIndex: $dialogIndex,

@@ -6,16 +6,11 @@ struct MenuView: View {
     @State private var isNavigating2 = false
     
     var body: some View {
-        
         NavigationStack {
-            
             ZStack {
-                
                 Color("menu")
                     .ignoresSafeArea()
-                
-                VStack(spacing: 0){
-
+                VStack(spacing: 0) {
                     VStack(spacing: -60) {
                         Image("New")
                             .resizable()
@@ -34,14 +29,12 @@ struct MenuView: View {
                         }
                     }
                     .padding(.top, 60)
-
-                            
-                    HStack(spacing: 100){
+                    HStack(spacing: 100) {
                         Image("ColorBlindnessTest")
                         Image("EyePhoto")
                         Image("VisionProblemTest")
                     }
-                    VStack(spacing: 50){
+                    VStack(spacing: 50) {
                         HStack (alignment: .bottom){
                             Image("OphthalmologistChair")
                                 .resizable()
@@ -52,7 +45,7 @@ struct MenuView: View {
                                 .scaledToFit()
                         }
                         
-                        VStack (spacing: 23.51) {
+                        VStack(spacing: 23.51) {
                             Button(action: {
                                 SoundManager.shared.playEffect(soundName: "button-click-1")
                                 isNavigating = true }) {
@@ -65,13 +58,11 @@ struct MenuView: View {
                                     Text("Start")
                                         .font(.system(size: 38, weight: .regular))
                                         .foregroundColor(.white)
-                                    
                                 }
                             }
                             .navigationDestination(isPresented: $isNavigating) {
                                 CharacterView()
                             }
-
                             Button(action: {
                                 SoundManager.shared.playEffect(soundName: "button-click-1")
                                 isNavigating2 = true}) {

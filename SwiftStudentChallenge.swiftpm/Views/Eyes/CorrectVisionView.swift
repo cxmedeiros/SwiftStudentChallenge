@@ -17,26 +17,20 @@ struct CorrectVisionView: View {
     
     var body: some View {
         NavigationStack {
-            
             ZStack {
                 Color("menu")
                     .ignoresSafeArea()
-                
                 VStack {
                     Spacer()
-                    VStack (alignment: .center, spacing: 100) {
+                    VStack(alignment: .center, spacing: 100) {
                         Image("Retina")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 500, height: 500)
-                        
-                        
                         Image("CorrectVision")
-                            
                     }
-                    
                     Spacer()
-                    VStack (spacing: 0){
+                    VStack(spacing: 0) {
                         DialogBox(
                             isVisible: $showDialog,
                             currentDialogIndex: $dialogIndex,

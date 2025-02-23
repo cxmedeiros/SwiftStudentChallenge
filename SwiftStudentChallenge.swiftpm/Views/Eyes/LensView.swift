@@ -13,28 +13,23 @@ struct LensView: View {
     @State private var dialogIndex = 0
     @State private var moveToNextScreen = false
     @State var changeDialog = true
+    
     var body: some View {
         NavigationStack {
-            
             ZStack {
                 Color("menu")
                     .ignoresSafeArea()
-                
                 VStack {
                     Spacer()
-                    VStack (alignment: .center, spacing: 100) {
+                    VStack(alignment: .center, spacing: 100) {
                         Image("Lens")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 500, height: 500)
-                        
-                        
                         MagnifyngGlass()
-                            
                     }
-                    
                     Spacer()
-                    VStack (spacing: 0){
+                    VStack(spacing: 0) {
                         DialogBox(
                             isVisible: $showDialog,
                             currentDialogIndex: $dialogIndex,
