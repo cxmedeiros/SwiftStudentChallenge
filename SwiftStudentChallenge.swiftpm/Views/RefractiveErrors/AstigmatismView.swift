@@ -24,7 +24,7 @@ struct AstigmatismView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("menu")
+                Color(.lightGray)
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
                     VStack(spacing: 100) {
@@ -42,13 +42,13 @@ struct AstigmatismView: View {
                                 }
                                 .frame(width: 750, height: 190)
                                 Rectangle()
-                                    .foregroundStyle(Color("rectangle"))
+                                    .foregroundStyle(Color(.lightTurquoise))
                                     .frame(width: 677, height: 130)
                                     .cornerRadius(30)
                                 Text("Drag the correct lens into the rectangle \n to correct Astigmatism!")
                                     .multilineTextAlignment(.center)
                                     .font(.system(size: 30, weight: .semibold))
-                                    .foregroundStyle(Color("text"))
+                                    .foregroundStyle(Color(.purple))
                             }
                             .padding(.top, 50)
                         }
@@ -58,7 +58,7 @@ struct AstigmatismView: View {
                             ZStack {
                                 if !rectangleOff && showChallenge {
                                     Rectangle()
-                                        .stroke(Color(.text), lineWidth: 2)
+                                        .stroke(Color(.purple), lineWidth: 2)
                                         .frame(width: 113, height: 237)
                                         .padding(.trailing, 200)
                                 }
@@ -91,7 +91,7 @@ struct AstigmatismView: View {
                                 changeDialog: $changeDialog,
                                 currentView: "AstigmatismView",
                                 dialogs:DialogData.astigmatismWithLens,
-                                dialogColor: Color("dialogBallon2")
+                                dialogColor: Color(.beige)
                             )
                         } else {
                             DialogBox(
@@ -101,7 +101,7 @@ struct AstigmatismView: View {
                                 changeDialog: $changeDialog,
                                 currentView: "AstigmatismView",
                                 dialogs: DialogData.astigmatism,
-                                dialogColor: Color("dialogBallon2")
+                                dialogColor: Color(.beige)
                             )
                             .onChange(of: dialogIndex) { newValue in
                                 if newValue == 1 {
@@ -132,7 +132,7 @@ struct AstigmatismView: View {
             VStack(spacing: -10) {
                     Text(label)
                     .font(.system(size: 30, weight: .semibold))
-                        .foregroundStyle(correctLensSelected && name == correctLens ? Color("button2") : Color("text"))
+                    .foregroundStyle(correctLensSelected && name == correctLens ? Color(.pink) : Color(.purple))
                         .padding(.top, 20)
                     Image(name)
                         .resizable()

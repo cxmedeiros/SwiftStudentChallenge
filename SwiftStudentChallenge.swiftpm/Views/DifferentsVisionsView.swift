@@ -15,13 +15,13 @@ struct DifferentsVisionsView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("menu")
+                Color(.lightGray)
                     .ignoresSafeArea()
                 VStack(spacing: 100){
                     Spacer()
                     Text("How Each Person Sees the World")
                         .font(.custom(MyCustomFonts.textFont.fontName, size: 56))
-                        .foregroundStyle(Color("button"))
+                        .foregroundStyle(Color(.darkPink))
                     ZStack {
                         VStack {
                             HStack {
@@ -51,7 +51,7 @@ struct DifferentsVisionsView: View {
                         ZStack {
                             Rectangle()
                                 .frame(width: 284, height: 67)
-                                .foregroundColor(Color("button"))
+                                .foregroundColor(Color(.darkPink))
                                 .cornerRadius(12.89)
                                 .shadow(radius: 5)
                             Text("Next")
@@ -84,7 +84,7 @@ struct VisionButton: View {
             ZStack {
                 Rectangle()
                     .frame(width: 180, height: 107)
-                    .foregroundColor(selectedVision == type ? Color("button") : Color("button2"))
+                    .foregroundColor(selectedVision == type ? Color(.darkPink) : Color(.pink))
                     .cornerRadius(12.89)
                     .shadow(radius: 5)
                 Text(title)

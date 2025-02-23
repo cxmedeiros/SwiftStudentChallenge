@@ -8,7 +8,7 @@ struct MenuView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("menu")
+                Color(.lightGray)
                     .ignoresSafeArea()
                 VStack(spacing: 0) {
                     VStack(spacing: -60) {
@@ -20,12 +20,12 @@ struct MenuView: View {
                         HStack {
                             Text("Visi")
                                 .font(.custom(MyCustomFonts.textFont.fontName, size: 135))
-                                .foregroundStyle(Color("button"))
+                                .foregroundStyle(Color(.darkPink))
                             OpenCloseEye()
                                 .padding(.bottom, 30)
                             Text("n")
                                 .font(.custom(MyCustomFonts.textFont.fontName, size: 135))
-                                .foregroundStyle(Color("button"))
+                                .foregroundStyle(Color(.darkPink))
                         }
                     }
                     .padding(.top, 60)
@@ -52,7 +52,7 @@ struct MenuView: View {
                                 ZStack {
                                     Rectangle()
                                         .frame(width: 284, height: 67)
-                                        .foregroundColor(Color("button"))
+                                        .foregroundColor(Color(.darkPink))
                                         .cornerRadius(12.89)
                                         .shadow(radius: 5)
                                     Text("Start")
@@ -69,7 +69,7 @@ struct MenuView: View {
                                 ZStack {
                                     Rectangle()
                                         .frame(width: 284, height: 67)
-                                        .foregroundColor(Color("button"))
+                                        .foregroundColor(Color(.darkPink))
                                         .cornerRadius(12.89)
                                         .shadow(radius: 5)
                                     Text("Credits")

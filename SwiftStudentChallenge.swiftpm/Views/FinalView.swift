@@ -10,7 +10,7 @@ struct FinalView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("menu")
+                Color(.lightGray)
                     .ignoresSafeArea()
                 VStack {
                     HStack(spacing: 100){
@@ -42,7 +42,7 @@ struct FinalView: View {
                         changeDialog: $changeDialog,
                         currentView: "FinalView",
                         dialogs: DialogData.final,
-                        dialogColor: Color("dialogBallon1")
+                        dialogColor: Color(.offWhite)
                     )
                     
                 }

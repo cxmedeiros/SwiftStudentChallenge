@@ -18,7 +18,7 @@ struct CorrectVisionView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("menu")
+                Color(.lightGray)
                     .ignoresSafeArea()
                 VStack {
                     Spacer()
@@ -38,7 +38,7 @@ struct CorrectVisionView: View {
                             changeDialog: $changeDialog,
                             currentView: "CorrectVisionView",
                             dialogs: DialogData.correctVision,
-                            dialogColor: Color("dialogBallon2")
+                            dialogColor: Color(.beige)
                         )
                     }
                 }

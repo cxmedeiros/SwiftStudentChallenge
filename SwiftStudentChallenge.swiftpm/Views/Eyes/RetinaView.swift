@@ -17,7 +17,7 @@ struct RetinaView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("menu")
+                Color(.lightGray)
                     .ignoresSafeArea()
                 VStack {
                     Spacer()
@@ -37,7 +37,7 @@ struct RetinaView: View {
                             changeDialog: $changeDialog,
                             currentView: "RetinaView",
                             dialogs: DialogData.retina,
-                            dialogColor: Color("dialogBallon2")
+                            dialogColor: Color(.beige)
                         )
                     }
                 }

@@ -17,7 +17,7 @@ struct LensView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("menu")
+                Color(.lightGray)
                     .ignoresSafeArea()
                 VStack {
                     Spacer()
@@ -37,7 +37,7 @@ struct LensView: View {
                             changeDialog: $changeDialog,
                             currentView: "LensView",
                             dialogs: DialogData.lens,
-                            dialogColor: Color("dialogBallon2")
+                            dialogColor: Color(.beige)
                         )
                     }
                 }

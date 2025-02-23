@@ -10,7 +10,7 @@ struct CharacterView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("menu")
+                Color(.lightGray)
                     .ignoresSafeArea()
                 
                 VStack {
@@ -43,7 +43,7 @@ struct CharacterView: View {
                         changeDialog: $changeDialog,
                         currentView: "CharacterView",
                         dialogs: DialogData.intro,
-                        dialogColor: Color("dialogBallon1")
+                        dialogColor: Color(.offWhite)
                     )
                 }
                 .padding(.bottom, 50)

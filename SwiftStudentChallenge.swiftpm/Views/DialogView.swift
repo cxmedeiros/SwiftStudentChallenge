@@ -30,7 +30,7 @@ struct DialogBox: View {
                 VStack() {
                     Text(text)
                         .font(.system(size: 25))
-                        .foregroundStyle(Color("button"))
+                        .foregroundStyle(Color(.darkPink))
                         .frame(maxWidth: 700, maxHeight: 100, alignment: .leading)
                         .padding(.horizontal, 20)
                     HStack {
@@ -40,7 +40,6 @@ struct DialogBox: View {
                         }, label: {
                             Image("Arrow")
                                 .font(.system(size: 35))
-                                .foregroundColor(Color("button"))
                         })
                         .padding(.trailing, 40)
                         .padding(.bottom, 20)

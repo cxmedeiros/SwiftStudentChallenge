@@ -10,7 +10,7 @@ struct CorneaPupilIrisView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("menu")
+                Color(.lightGray)
                     .ignoresSafeArea()
                 VStack {
                     Spacer()
@@ -30,7 +30,7 @@ struct CorneaPupilIrisView: View {
                             changeDialog: $changeDialog,
                             currentView: "CorneaPupilIrisView",
                             dialogs: DialogData.corneaPupilIris,
-                            dialogColor: Color("dialogBallon2")
+                            dialogColor: Color(.beige)
                         )
                     }
                 }

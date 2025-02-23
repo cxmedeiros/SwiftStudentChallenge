@@ -12,7 +12,7 @@ struct CreditsView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("menu")
+                Color(.lightGray)
                     .ignoresSafeArea()
             
                 ScrollView (.vertical, showsIndicators: false) {
@@ -33,7 +33,7 @@ struct CreditsView: View {
                             Text("Back")
                                 .font(.system(size: 40))
                         }
-                        .foregroundColor(Color("button"))
+                        .foregroundColor(Color(.darkPink))
                     }
                 }
             }
@@ -49,12 +49,12 @@ struct CreditPage: View {
         VStack(spacing: 40) {
             Text("Credits")
                 .font(.custom(MyCustomFonts.textFont.fontName, size: 72))
-                .foregroundColor(Color("button"))
+                .foregroundColor(Color(.darkPink))
             ZStack {
                 Rectangle()
                     .frame(width: 780, height: 202)
                     .cornerRadius(20)
-                    .foregroundStyle(Color("rectangle2"))
+                    .foregroundStyle(Color(.turquoise))
                     HStack(spacing: 30) {
                         Image("Character2")
                             .resizable()
@@ -72,13 +72,13 @@ struct CreditPage: View {
                 VStack {
                     Text("Assets & Illustrations")
                         .font(.system(size: 28, weight: .semibold))
-                        .foregroundColor(Color("button"))
+                        .foregroundColor(Color(.darkPink))
                     ZStack {
                         Rectangle()
                             .frame(width: 390, height: 225)
                             .cornerRadius(20)
-                            .foregroundStyle(Color("button"))
-                        Text("Made by Camila Xavier (me) specially for this project, but I had inspiration from websites such as Pinterest and Freepik.")
+                            .foregroundStyle(Color(.darkPink))
+                        Text("Made by Camila Xavier (me) specially for this project, but I had inspiration from websites such as Pinterest and Freepik, and my Memoji.")
                             .frame(width: 355, height: 220)
                             .font(.system(size: 22, weight: .regular))
                             .multilineTextAlignment(.center)
@@ -88,13 +88,12 @@ struct CreditPage: View {
                 VStack {
                     Text("Code Reference")
                         .font(.system(size: 28, weight: .semibold))
-                        .foregroundColor(Color("button"))
+                        .foregroundColor(Color(.darkPink))
                     ZStack {
                         Rectangle()
                             .frame(width: 390, height: 225)
                             .cornerRadius(20)
-                            .foregroundStyle(Color("button"))
-                            .foregroundStyle(Color("button"))
+                            .foregroundStyle(Color(.darkPink))
                         Text("""
                 Animating Shapes (Explosion Animarion) - APPLE INC.
                 SWIFT PLAYGROUNDS SOFTWARE LICENSE AGREEMENT
@@ -113,11 +112,11 @@ struct CreditPage: View {
                 VStack {
                     Text("Sounds")
                         .font(.system(size: 28, weight: .semibold))
-                        .foregroundColor(Color("button"))
+                        .foregroundColor(Color(.darkPink))
                     Rectangle()
                         .frame(width: 780, height: 385)
                         .cornerRadius(20)
-                        .foregroundStyle(Color("rectangle2"))
+                        .foregroundStyle(Color(.turquoise))
                 }
                 Text("""
                      Relaxing Light Background (loop ver.2) by AudioCoffee -` https://freesound.org/s/725613/` - License: Attribution NonCommercial 4.0
@@ -137,14 +136,14 @@ struct CreditPage: View {
                 VStack {
                     Text("References")
                         .font(.system(size: 28, weight: .semibold))
-                        .foregroundColor(Color("button"))
+                        .foregroundColor(Color(.darkPink))
                     ZStack {
                         Rectangle()
                             .frame(width: 780, height: 386)
                             .cornerRadius(20)
-                            .foregroundStyle(Color("button"))
+                            .foregroundStyle(Color(.darkPink))
                         Text("""
-                             Everything that “New Vision” teaches was found in articles on anatomy and morphology of the human visual system and the study of optical lenses for correcting vision problems.
+                             Everything that New Vision teaches was found in articles on anatomy and morphology of the human visual system and the study of optical lenses for correcting vision problems.
                              
                              H. E. A. Bicas, “Morfologia do sistema visual,” Medicina (Ribeirão Preto), vol. 30, no. 1, pp. 7–15, Mar. 1997, doi: 10.11606/issn.2176-7262.v30i1p7-15.
 
@@ -159,12 +158,12 @@ struct CreditPage: View {
             VStack() {
                 Text("Fonts")
                     .font(.system(size: 28, weight: .semibold))
-                    .foregroundColor(Color("button"))
+                    .foregroundColor(Color(.darkPink))
                 ZStack {
                     Rectangle()
                         .frame(width: 780, height: 200)
                         .cornerRadius(20)
-                        .foregroundStyle(Color("rectangle2"))
+                        .foregroundStyle(Color(.turquoise))
                     Text("""
                              Copyright (c) 2011, Pablo Impallari (`www.impallari.com|impallari@gmail.com`), Rodrigo Fuenzalida ('www.rfuenzalida.com') with Reserved Font Name Cantora -  SIL Open Font License, Version 1.1.
                              
