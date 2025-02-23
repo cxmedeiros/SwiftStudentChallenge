@@ -70,7 +70,7 @@ struct CreditPage: View {
             }
             HStack {
                 VStack {
-                    Text("Assets & Illustrations")
+                    Text("Illustrations")
                         .font(.system(size: 28, weight: .semibold))
                         .foregroundColor(Color(.darkPink))
                     ZStack {

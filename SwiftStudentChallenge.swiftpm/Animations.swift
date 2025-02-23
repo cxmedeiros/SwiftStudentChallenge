@@ -171,7 +171,7 @@ struct SplashScreen: View {
 
 struct ExplodingView: View {
 
-    let colors: [Color] = [Color("button"), Color("rectangle"), Color("star"), Color("text")]
+    let colors: [Color] = [Color(.darkPink), Color(.turquoise), Color(.pink), Color(.purple)]
     @State private var isExploded = false
     private let explodingBits: Int = 75
     var body: some View {

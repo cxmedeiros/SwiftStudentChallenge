@@ -66,10 +66,17 @@ struct HyperopiaView: View {
                                     ExplodingView()
                                         .transition(.scale)
                                 }
-                                Image(eyeImage)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 690, height: 340)
+                                VStack {
+                                    if !showChallenge {
+                                        Text("Hyperopia")
+                                            .font(.custom(MyCustomFonts.textFont.fontName, size: 72))
+                                            .foregroundColor(Color(.darkPink))
+                                    }
+                                    Image(eyeImage)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 690, height: 340)
+                                }
                             }
                             Spacer()
                             if showChallenge {

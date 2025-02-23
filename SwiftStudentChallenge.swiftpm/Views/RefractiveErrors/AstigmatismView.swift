@@ -66,10 +66,17 @@ struct AstigmatismView: View {
                                     ExplodingView()
                                         .transition(.scale)
                                 }
-                                Image(eyeImage)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 690, height: 340)
+                                VStack {
+                                    if !showChallenge {
+                                        Text("Astigmatism")
+                                            .font(.custom(MyCustomFonts.textFont.fontName, size: 72))
+                                            .foregroundColor(Color(.darkPink))
+                                    }
+                                    Image(eyeImage)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 690, height: 340)
+                                }
                             }
                             Spacer()
                             if showChallenge {
@@ -104,7 +111,7 @@ struct AstigmatismView: View {
                                 dialogColor: Color(.beige)
                             )
                             .onChange(of: dialogIndex) { newValue in
-                                if newValue == 1 {
+                                if newValue == 2 {
                                     withAnimation {
                                         showChallenge = true
                                     }

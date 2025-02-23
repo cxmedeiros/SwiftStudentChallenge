@@ -134,7 +134,7 @@ struct DialogData {
         Dialog(string: "But sometimes, our eyes need a little help...")
     ]
     static let myopia: [Dialog] = [
-        Dialog(string: "People with Myopia see well up close, but distant objects appear blurry."),
+        Dialog(string: "People with Myopia see well up close, but distant objects appear blurry, because the eye focuses the image before the retina."),
         Dialog(string: "Let’s try a challenge! Which lens can fix this?"),
     ]
     static let myopiaWithLens: [Dialog] = [
@@ -148,7 +148,8 @@ struct DialogData {
         Dialog(string: "Great! A Convex lens helps bring the image into focus at the right spot!")
     ]
     static let astigmatism: [Dialog] = [
-        Dialog(string: "With Astigmatism, the cornea has an irregular, slightly oval shape. This causes light to scatter, making vision distorted."),
+        Dialog(string: "With Astigmatism, the cornea has an irregular, slightly oval shape, causing different focal points on the retina."),
+        Dialog(string: "This causes light to scatter, making vision distorted."),
         Dialog(string: "Do you know which lens can fix this?")
     ]
     static let astigmatismWithLens: [Dialog] = [
