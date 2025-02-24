@@ -3,7 +3,6 @@ import SwiftUI
 struct OpenCloseEye: View {
     @State private var imageIndex = 0
     @State private var showNextImage = false
-    
     @State private var timer: Timer?
     
     let images = ["OpenEye", "CloseEye"]
@@ -31,7 +30,6 @@ struct OpenCloseEye: View {
 struct Window: View {
     @State private var imageIndex = 0
     @State private var showNextImage = false
-    
     @State private var timer: Timer?
     
     let images = ["OpenWindow", "OpenWindow2", "CloseWindow"]
@@ -86,7 +84,6 @@ struct MagnifyngGlass: View {
 struct Projector: View {
     @State private var imageIndex = 0
     @State private var showNextImage = false
-    
     @State private var timer: Timer?
     
     let images = ["ProjectorOff", "ProjectorOn"]
@@ -114,7 +111,6 @@ struct Projector: View {
 struct Arrow: View {
     @State private var imageIndex = 0
     @State private var showNextImage = false
-    
     @State private var timer: Timer?
     
     let images = ["Arrow2", "Arrow3"]
@@ -173,6 +169,7 @@ struct ExplodingView: View {
 
     let colors: [Color] = [Color(.darkPink), Color(.turquoise), Color(.pink), Color(.purple)]
     @State private var isExploded = false
+    
     private let explodingBits: Int = 75
     var body: some View {
         VStack {

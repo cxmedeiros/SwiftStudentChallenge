@@ -6,6 +6,8 @@ struct SplashScreenView: View {
     var body: some View {
         
         ZStack {
+            Color(.lightGray)
+                .ignoresSafeArea()
             if isActive {
                 MenuView()
             } else {
